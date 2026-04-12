@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahata Lab | Phage-Bacteria Interactions | NISER Bhubaneswar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MAHATA LAB — STYLESHEET
+   Do NOT edit this section unless you know CSS.
+   All your content edits are in the HTML body below.
+   ============================================================ */
+:root {
+  --green-deep:  #0a2e0a;
+  --green-dark:  #0f3d0f;
+  --green-mid:   #1a5c1a;
+  --green-accent:#2ecc40;
+  --green-bright:#39ff14;
+  --black:       #050f05;
+  --white:       #f4fdf4;
+  --gray:        #b0c4b0;
+  --gray-dark:   #3a4a3a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden;}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(5,15,5,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(46,204,64,0.15);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-text{font-weight:900;font-size:1.15rem;letter-spacing:0.18em;color:var(--white);text-transform:uppercase;}
+.t7-logo{width:36px;height:36px;flex-shrink:0;}
+nav{display:flex;gap:2px;}
+nav a{font-weight:600;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);text-decoration:none;padding:8px 14px;transition:all 0.25s;position:relative;}
+nav a::after{content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1px;background:var(--green-accent);transform:scaleX(0);transition:transform 0.25s;}
+nav a:hover{color:var(--white);}
+nav a:hover::after,nav a.active::after{transform:scaleX(1);}
+nav a.active{color:var(--green-accent);}
+.social-links{display:flex;gap:6px;align-items:center;margin-left:12px;padding-left:12px;border-left:1px solid rgba(46,204,64,0.15);}
+.social-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--gray-dark);transition:all 0.25s;text-decoration:none;border-radius:50%;}
+.social-icon svg{width:14px;height:14px;}
+.social-icon:hover{color:var(--green-accent);background:rgba(46,204,64,0.08);}
+
+/* SECTIONS */
+.section{display:none;}
+.section.active{display:block;}
+
+/* HOME */
+#home{min-height:100vh;padding-top:72px;}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;padding:0 80px;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 50%,rgba(15,61,15,0.6) 0%,transparent 70%),var(--black);}
+.hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(46,204,64,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(46,204,64,0.04) 1px,transparent 1px);background-size:60px 60px;}
+.hero-content{position:relative;z-index:2;max-width:600px;}
+.hero-eyebrow{font-size:0.72rem;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--green-accent);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--green-accent);}
+.hero-title{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:28px;}
+.hero-title span{color:var(--green-accent);}
+.hero-sub{font-size:1rem;font-weight:300;line-height:1.75;color:var(--gray);max-width:520px;}
+.hero-cta{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{background:var(--green-accent);color:var(--black);font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 32px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.25s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-primary:hover{background:var(--green-bright);box-shadow:0 0 24px rgba(57,255,20,0.4);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--white);font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;padding:13px 32px;border:1px solid var(--gray-dark);cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.25s;}
+.btn-outline:hover{border-color:var(--green-accent);color:var(--green-accent);}
+.hero-animation{position:absolute;right:0;top:0;bottom:0;width:55%;z-index:1;}
+#phage-canvas{width:100%;height:100%;}
+
+/* OBJECTIVE */
+.objective-section{padding:100px 80px;background:linear-gradient(180deg,var(--black) 0%,var(--green-deep) 50%,var(--black) 100%);position:relative;}
+.objective-section::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--green-accent),transparent);}
+.section-label{font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--green-accent);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';display:block;width:32px;height:1px;background:var(--green-accent);}
+.section-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:900;letter-spacing:-0.02em;margin-bottom:40px;line-height:1.1;}
+.objective-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.objective-text{font-size:1rem;font-weight:300;line-height:1.9;color:var(--gray);padding-left:28px;border-left:2px solid var(--green-accent);}
+.objective-anim-box{position:relative;height:380px;border:1px solid rgba(46,204,64,0.2);background:rgba(0,0,0,0.5);overflow:hidden;}
+#interaction-canvas{width:100%;height:100%;}
+.anim-label{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:0.68rem;letter-spacing:0.2em;color:var(--green-accent);text-transform:uppercase;opacity:0.7;}
+
+/* FOCUS */
+.focus-section{padding:100px 80px;background:var(--black);}
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.focus-card{background:var(--green-deep);padding:48px 40px;position:relative;overflow:hidden;transition:all 0.35s;border:1px solid rgba(46,204,64,0.08);}
+.focus-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(46,204,64,0.08) 0%,transparent 60%);opacity:0;transition:opacity 0.35s;}
+.focus-card:hover{border-color:rgba(46,204,64,0.35);transform:translateY(-4px);}
+.focus-card:hover::before{opacity:1;}
+.focus-number{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;color:var(--green-accent);margin-bottom:24px;opacity:0.7;}
+.focus-icon{width:72px;height:72px;margin-bottom:28px;}
+.focus-title{font-size:1.15rem;font-weight:800;color:var(--white);margin-bottom:18px;line-height:1.3;}
+.focus-desc{font-size:0.88rem;font-weight:300;line-height:1.8;color:var(--gray);}
+.focus-card-accent{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green-accent);transform:scaleX(0);transition:transform 0.35s;transform-origin:left;}
+.focus-card:hover .focus-card-accent{transform:scaleX(1);}
+
+/* FOOTER */
+.site-footer{padding:52px 80px;background:var(--green-deep);border-top:1px solid rgba(46,204,64,0.15);display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:40px;align-items:center;}
+.footer-logos{display:flex;align-items:center;gap:20px;}
+.footer-logo-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.footer-lab-name{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-accent);}
+.footer-logo-divider{width:1px;height:50px;background:rgba(46,204,64,0.2);}
+.niser-logo-box{border:1px dashed rgba(46,204,64,0.3);padding:8px 14px;text-align:center;background:rgba(46,204,64,0.04);}
+.niser-logo-text{display:block;font-size:1rem;font-weight:900;color:var(--green-accent);letter-spacing:0.2em;}
+.niser-logo-sub{display:block;font-size:0.55rem;color:var(--gray-dark);letter-spacing:0.1em;margin-top:2px;}
+.footer-center{text-align:center;}
+.footer-quote{font-size:0.88rem;font-weight:300;font-style:italic;color:var(--gray);line-height:1.7;}
+.quote-mark{font-size:1.2rem;color:var(--green-accent);font-style:normal;}
+.footer-attr{font-size:0.72rem;font-weight:600;letter-spacing:0.18em;color:var(--green-accent);text-transform:uppercase;margin-top:8px;}
+.footer-right{text-align:right;}
+.footer-copy{font-size:0.72rem;color:var(--gray-dark);letter-spacing:0.05em;}
+
+/* PUBLICATIONS */
+#publications{min-height:100vh;padding-top:72px;background:var(--black);}
+.pub-section{padding:80px 80px 100px;}
+.pub-year-group{margin-bottom:56px;}
+.pub-year{font-size:0.68rem;font-weight:700;letter-spacing:0.35em;color:var(--green-accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.pub-year::after{content:'';flex:1;height:1px;background:rgba(46,204,64,0.15);}
+.pub-card{background:rgba(10,46,10,0.3);border:1px solid rgba(46,204,64,0.08);border-left:2px solid rgba(46,204,64,0.4);padding:22px 28px;margin-bottom:10px;transition:all 0.25s;}
+.pub-card:hover{border-left-color:var(--green-accent);background:rgba(10,46,10,0.55);transform:translateX(4px);}
+.pub-title{font-size:0.92rem;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:6px;}
+.pub-authors{font-size:0.78rem;font-weight:300;color:var(--gray);line-height:1.6;margin-bottom:4px;}
+.pub-authors strong{color:var(--white);font-weight:600;}
+.pub-journal{font-size:0.78rem;color:var(--gray-dark);font-style:italic;}
+.pub-preprint{display:inline-block;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(46,204,64,0.12);color:var(--green-accent);border:1px solid rgba(46,204,64,0.25);padding:2px 8px;margin-left:8px;vertical-align:middle;}
+.pub-equal{font-size:0.7rem;color:var(--gray-dark);margin-top:3px;}
+
+/* TEAM */
+#team{min-height:100vh;padding-top:72px;background:var(--black);}
+.team-section{padding:80px 80px 100px;}
+.team-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(46,204,64,0.25),transparent);margin:70px 0;}
+.pi-block{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:start;}
+.hex-frame-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.hex-frame{width:200px;height:220px;position:relative;flex-shrink:0;}
+.hex-frame svg,.hex-frame-sm svg{width:100%;height:100%;}
+.hex-img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;}
+.hex-placeholder-text{font-size:0.6rem;font-weight:600;letter-spacing:0.15em;color:rgba(46,204,64,0.5);text-transform:uppercase;text-align:center;}
+.pi-details{padding-top:8px;}
+.pi-name{font-size:2rem;font-weight:900;color:var(--white);letter-spacing:-0.01em;margin-bottom:4px;}
+.pi-title-tag{font-size:0.82rem;font-weight:600;letter-spacing:0.18em;color:var(--green-accent);text-transform:uppercase;margin-bottom:6px;}
+.pi-role{font-size:0.82rem;font-weight:400;color:var(--gray);margin-bottom:4px;}
+.pi-email{font-size:0.82rem;color:var(--green-accent);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:28px;}
+.pi-email:hover{text-decoration:underline;}
+.pi-bio-area{border-left:2px solid rgba(46,204,64,0.25);padding-left:20px;min-height:120px;color:var(--gray);font-size:0.9rem;font-weight:300;line-height:1.8;}
+.pi-bio-placeholder{color:var(--gray-dark);font-style:italic;font-size:0.8rem;}
+.phd-section-title{font-size:1rem;font-weight:700;letter-spacing:0.25em;color:var(--green-accent);text-transform:uppercase;margin-bottom:36px;display:flex;align-items:center;gap:14px;}
+.phd-section-title::after{content:'';flex:1;height:1px;background:rgba(46,204,64,0.15);}
+.student-card{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid rgba(46,204,64,0.07);}
+.student-card:last-child{border-bottom:none;}
+.hex-frame-sm{width:140px;height:155px;position:relative;flex-shrink:0;}
+.student-details{padding-top:4px;}
+.student-name{font-size:1.4rem;font-weight:800;color:var(--white);letter-spacing:-0.01em;margin-bottom:2px;}
+.student-nickname{font-size:0.75rem;color:var(--green-accent);font-weight:600;letter-spacing:0.1em;}
+.student-degree{font-size:0.78rem;font-weight:400;color:var(--gray);margin-bottom:4px;margin-top:2px;}
+.student-role-badge{display:inline-block;font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(46,204,64,0.1);color:var(--green-accent);border:1px solid rgba(46,204,64,0.22);padding:3px 10px;margin-bottom:18px;}
+.student-bio-area{min-height:80px;color:var(--gray);font-size:0.88rem;font-weight:300;line-height:1.8;border-left:2px solid rgba(46,204,64,0.18);padding-left:16px;}
+
+/* RESEARCH */
+#research{min-height:100vh;padding-top:72px;background:var(--black);}
+.research-section{padding:80px 80px 100px;}
+.research-coming{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;gap:18px;text-align:center;}
+.research-coming h3{font-size:1.4rem;font-weight:700;color:var(--white);}
+.research-coming p{color:var(--gray);font-size:0.9rem;max-width:480px;line-height:1.7;}
+
+/* CONTACT */
+#contact{min-height:100vh;padding-top:72px;background:var(--black);}
+.contact-section{padding:80px 80px 100px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-lab-name{font-size:2.2rem;font-weight:900;color:var(--white);letter-spacing:-0.02em;margin-bottom:6px;}
+.contact-tagline{font-size:0.8rem;color:var(--green-accent);font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:36px;}
+.contact-detail-block{margin-bottom:24px;}
+.contact-label{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;color:var(--green-accent);text-transform:uppercase;margin-bottom:6px;}
+.contact-value{font-size:0.92rem;font-weight:300;color:var(--gray);line-height:1.8;}
+.contact-value a{color:var(--green-accent);text-decoration:none;}
+.contact-value a:hover{text-decoration:underline;}
+.contact-logo-area{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:20px;gap:24px;}
+.contact-map-placeholder{width:100%;height:280px;border:1px dashed rgba(46,204,64,0.2);background:rgba(10,46,10,0.15);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;margin-top:30px;}
+.contact-map-placeholder p{font-size:0.75rem;color:var(--gray-dark);letter-spacing:0.1em;}
+
+/* PICTURES */
+#pictures{min-height:100vh;padding-top:72px;background:var(--black);}
+.pictures-section{padding:80px 80px 100px;}
+.pictures-coming{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;gap:18px;text-align:center;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--green-mid);border-radius:3px;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  header{padding:0 20px;}
+  nav a{padding:6px 8px;font-size:0.65rem;}
+  .hero{padding:40px 28px;}
+  .hero-animation{display:none;}
+  .objective-section,.focus-section,.team-section,.research-section,.pictures-section{padding:60px 28px;}
+  .contact-section,.pub-section{padding:60px 28px;}
+  .objective-grid,.focus-grid,.contact-section{grid-template-columns:1fr;}
+  .pi-block,.student-card{grid-template-columns:1fr;}
+  .site-footer{grid-template-columns:1fr;text-align:center;padding:40px 28px;}
+  .footer-logos{justify-content:center;}
+  .footer-right{text-align:center;}
+  .social-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  MAHATA LAB WEBSITE — HOW TO EDIT THIS FILE
+  ============================================================
+  Open this file in VS Code (free: code.visualstudio.com)
+  Press Ctrl+F and search for "EDIT HERE" to jump to each
+  editable spot. Save (Ctrl+S) then re-upload to GitHub.
+
+  ADDING A PHOTO:
+    Put photo.jpg in the "images" folder.
+    Change:  src="images/your-photo.jpg"
+    To:      src="images/tridib.jpg"  (or your actual filename)
+
+  ADDING A YOUTUBE VIDEO:
+    Go to YouTube video → Share → Embed → copy the URL
+    Paste it into: src="PASTE-YOUTUBE-URL-HERE"
+
+  ADDING A LOCAL VIDEO (.mp4):
+    Put video.mp4 in the images folder.
+    Change "images/your-video.mp4" to your actual filename.
+  ============================================================ -->
+
+<!-- =================== HEADER =================== -->
+<header>
+  <a class="logo" href="#" onclick="showSection('home'); return false;">
+    <svg class="t7-logo" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="19,2 31,9 31,23 19,30 7,23 7,9" fill="none" stroke="#2ecc40" stroke-width="1.5"/>
+      <polygon points="19,4 29,10 29,22 19,28 9,22 9,10" fill="rgba(46,204,64,0.08)" stroke="#2ecc40" stroke-width="0.5"/>
+      <rect x="16.5" y="28" width="5" height="3" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+      <rect x="14" y="31" width="10" height="2.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+      <line x1="14" y1="33" x2="8" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <line x1="16" y1="33" x2="12" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <line x1="24" y1="33" x2="30" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <line x1="22" y1="33" x2="26" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <circle cx="19" cy="16" r="4" fill="none" stroke="rgba(46,204,64,0.3)" stroke-width="0.8" stroke-dasharray="2,2"/>
+    </svg>
+    <span class="logo-text">Mahata Lab</span>
+  </a>
+
+  <nav>
+    <a href="#" class="active" onclick="showSection('home',this); return false;">Home</a>
+    <a href="#" onclick="showSection('research',this); return false;">Research</a>
+    <a href="#" onclick="showSection('publications',this); return false;">Publications</a>
+    <a href="#" onclick="showSection('team',this); return false;">Team</a>
+    <a href="#" onclick="showSection('contact',this); return false;">Contact</a>
+    <a href="#" onclick="showSection('pictures',this); return false;">Pictures</a>
+  </nav>
+
+  <div class="social-links">
+    <!-- EDIT HERE — Replace # with your actual social media URLs -->
+    <a href="#" class="social-icon" title="Twitter / X" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.737-8.835L2.25 2.25h6.945l4.265 5.633 4.784-5.633Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>
+    </a>
+    <a href="#" class="social-icon" title="LinkedIn" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="#" class="social-icon" title="Google Scholar" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5 12 0z"/></svg>
+    </a>
+    <a href="mailto:tridibmahata@niser.ac.in" class="social-icon" title="Email">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- =================== HOME SECTION =================== -->
+<div id="home" class="section active">
+
+  <!-- HERO BANNER -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+
+      <!-- EDIT HERE — Short tagline below the line -->
+      <p class="hero-eyebrow">Microbiology &middot; Genomics &middot; Biochemistry</p>
+
+      <!-- EDIT HERE — Main headline. Words inside <span> appear in green. -->
+      <h1 class="hero-title">
+        The Molecular<br>
+        <span>Arms Race</span><br>
+        Never Ends
+      </h1>
+
+      <!-- EDIT HERE — Intro paragraph on the homepage -->
+      <p class="hero-sub">
+        Decoding the ancient conflict between bacteria and bacteriophages &mdash;
+        a battle billions of years in the making. We uncover the molecular weapons
+        and defenses that shape microbial life, translating discoveries into tools for
+        biotechnology and medicine.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#" class="btn-primary" onclick="showSection('research',document.querySelector('nav a:nth-child(2)')); return false;">Read More</a>
+        <a href="#" class="btn-outline" onclick="showSection('contact',document.querySelector('nav a:nth-child(5)')); return false;">Join the Lab</a>
+      </div>
+    </div>
+    <div class="hero-animation">
+      <canvas id="phage-canvas"></canvas>
+    </div>
+  </section>
+
+  <!-- OBJECTIVE SECTION -->
+  <section class="objective-section">
+    <div class="section-label">Our Mission</div>
+    <h2 class="section-title">Lab Objective</h2>
+    <div class="objective-grid">
+      <div>
+        <!-- EDIT HERE — Lab objective text -->
+        <p class="objective-text">
+          Our lab explores the fascinating molecular conflict between bacteria and
+          bacteriophages &mdash; a never-ending evolutionary arms race that has been
+          ongoing for billions of years. Our aim is to uncover fundamental mechanisms
+          of microbial warfare: how phages take over their bacterial hosts and how
+          bacteria defend themselves against phage attack.<br><br>
+          Using a combination of microbial genetics, molecular biology, genomics, and
+          biochemistry, we investigate these interactions and translate our discoveries
+          into innovative tools for biotechnology and medicine.
+        </p>
+      </div>
+      <div class="objective-anim-box">
+        <canvas id="interaction-canvas"></canvas>
+        <div class="anim-label">Live simulation &mdash; Phage&ndash;Bacteria Interaction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH FOCUS CARDS -->
+  <section class="focus-section">
+    <div class="section-label">Research Focus</div>
+    <h2 class="section-title">What We Study</h2>
+    <div class="focus-grid">
+
+      <!-- EDIT HERE — Focus card 1: change title and description text -->
+      <div class="focus-card">
+        <div class="focus-number">01 &mdash; Discovery</div>
+        <svg class="focus-icon" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
+          <path d="M36 12 L52 20 L52 40 C52 52 36 60 36 60 C36 60 20 52 20 40 L20 20 Z" fill="rgba(46,204,64,0.12)" stroke="#2ecc40" stroke-width="1.5"/>
+          <path d="M30 28 Q36 32 30 36 Q36 40 30 44" stroke="#2ecc40" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M42 28 Q36 32 42 36 Q36 40 42 44" stroke="#2ecc40" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <line x1="30" y1="28" x2="42" y2="28" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
+          <line x1="30" y1="36" x2="42" y2="36" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
+          <line x1="30" y1="44" x2="42" y2="44" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
+        </svg>
+        <h3 class="focus-title">Discovery of Novel Bacterial Immune Systems</h3>
+        <p class="focus-desc">We explore the GMT mobile genomic island &mdash; a hotspot of bacterial defense systems &mdash; along with other defense islands and environmental microbiomes, to discover new anti-phage systems. Understanding these systems may reveal evolutionary parallels to human immune pathways.</p>
+        <div class="focus-card-accent"></div>
+      </div>
+
+      <!-- EDIT HERE — Focus card 2 -->
+      <div class="focus-card">
+        <div class="focus-number">02 &mdash; Mechanisms</div>
+        <svg class="focus-icon" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
+          <polygon points="36,10 46,17 46,30 36,37 26,30 26,17" fill="rgba(46,204,64,0.15)" stroke="#2ecc40" stroke-width="1.5"/>
+          <rect x="33.5" y="37" width="5" height="5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <rect x="31" y="42" width="10" height="2" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="31" y1="44" x2="26" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="33" y1="44" x2="30" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="41" y1="44" x2="46" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="39" y1="44" x2="42" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <path d="M50 14 L44 26 L49 26 L43 40" stroke="#39ff14" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 class="focus-title">Unravelling Phage Counter-Defense Strategies</h3>
+        <p class="focus-desc">Phages have evolved remarkable strategies to overcome bacterial defenses, including direct inhibitors that neutralize immune systems. We study these counter-defense mechanisms to understand how phages disarm host immunity and harness these molecular tools for therapeutic applications.</p>
+        <div class="focus-card-accent"></div>
+      </div>
+
+      <!-- EDIT HERE — Focus card 3 -->
+      <div class="focus-card">
+        <div class="focus-number">03 &mdash; Therapeutics</div>
+        <svg class="focus-icon" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
+          <ellipse cx="36" cy="42" rx="18" ry="12" fill="rgba(46,204,64,0.1)" stroke="#2ecc40" stroke-width="1.5"/>
+          <path d="M54 42 Q60 36 58 28" stroke="#2ecc40" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <path d="M18 42 Q12 38 14 28" stroke="#2ecc40" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <path d="M36 14 L36 28" stroke="#39ff14" stroke-width="2" stroke-linecap="round"/>
+          <polygon points="36,30 31,21 41,21" fill="#39ff14"/>
+          <circle cx="36" cy="42" r="5" stroke="rgba(57,255,20,0.6)" stroke-width="1" fill="none"/>
+          <line x1="36" y1="37" x2="36" y2="47" stroke="rgba(57,255,20,0.6)" stroke-width="1"/>
+          <line x1="31" y1="42" x2="41" y2="42" stroke="rgba(57,255,20,0.6)" stroke-width="1"/>
+        </svg>
+        <h3 class="focus-title">Exploring Phage-Encoded Antimicrobials</h3>
+        <p class="focus-desc">Phages encode a vast repertoire of proteins targeting diverse bacterial metabolic processes. We identify phage-encoded proteins with antimicrobial activity, elucidate their mechanisms of action, and explore their potential to combat multidrug-resistant bacteria.</p>
+        <div class="focus-card-accent"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-logos">
+      <div class="footer-logo-item">
+        <svg width="44" height="44" viewBox="0 0 38 38" fill="none">
+          <polygon points="19,2 31,9 31,23 19,30 7,23 7,9" fill="none" stroke="#2ecc40" stroke-width="1.5"/>
+          <polygon points="19,4 29,10 29,22 19,28 9,22 9,10" fill="rgba(46,204,64,0.08)" stroke="#2ecc40" stroke-width="0.5"/>
+          <rect x="16.5" y="28" width="5" height="3" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <rect x="14" y="31" width="10" height="2.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="14" y1="33" x2="8" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="16" y1="33" x2="12" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="24" y1="33" x2="30" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="22" y1="33" x2="26" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <circle cx="19" cy="16" r="4" fill="none" stroke="rgba(46,204,64,0.3)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        </svg>
+        <span class="footer-lab-name">Mahata Lab</span>
+      </div>
+      <div class="footer-logo-divider"></div>
+
+      <!-- EDIT HERE — NISER LOGO
+           When you have the NISER logo image:
+           1. Put niser-logo.png in your "images" folder
+           2. Delete the <div class="niser-logo-box">...</div> block below
+           3. Paste this in its place:
+              <img src="images/niser-logo.png" alt="NISER" style="height:55px;object-fit:contain;">
+      -->
+      <div class="footer-logo-item">
+        <div class="niser-logo-box">
+          <span class="niser-logo-text">NISER</span>
+          <span class="niser-logo-sub">Logo Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-center">
+      <p class="footer-quote">
+        <span class="quote-mark">&ldquo;</span>In the fields of observation, chance only favours the mind which is prepared&hellip;<span class="quote-mark">&rdquo;</span>
+      </p>
+      <p class="footer-attr">&mdash; Louis Pasteur</p>
+    </div>
+
+    <div class="footer-right">
+      <!-- EDIT HERE — Update the year when needed -->
+      <p class="footer-copy">&copy; 2025 Mahata Lab &middot; NISER Bhubaneswar</p>
+      <p class="footer-copy" style="margin-top:4px;">School of Biological Sciences</p>
+    </div>
+  </footer>
+</div>
+
+<!-- =================== RESEARCH SECTION =================== -->
+<div id="research" class="section">
+  <div class="research-section">
+    <div class="section-label">Ongoing Work</div>
+    <h2 class="section-title">Research</h2>
+
+    <!-- EDIT HERE — RESEARCH PAGE CONTENT
+         Replace everything inside the <div class="research-coming"> block below
+         with your actual research content. Example structure:
+
+         <h3 style="font-size:1.6rem;font-weight:900;color:white;margin-bottom:16px;">Project 1: GMT Islands</h3>
+         <p style="color:#b0c4b0;line-height:1.8;max-width:800px;margin-bottom:40px;">Your description...</p>
+
+         To add a YouTube video:
+         <iframe width="100%" height="420"
+           src="https://www.youtube.com/embed/PASTE-VIDEO-ID-HERE"
+           frameborder="0" allowfullscreen
+           style="margin-top:24px;border:1px solid rgba(46,204,64,0.2)"></iframe>
+
+         To add a local video:
+         <video width="100%" controls style="margin-top:24px;">
+           <source src="images/your-video.mp4" type="video/mp4">
+         </video>
+    -->
+    <div class="research-coming">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" stroke="rgba(46,204,64,0.2)" stroke-width="1.5"/>
+        <circle cx="30" cy="30" r="18" stroke="rgba(46,204,64,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+        <circle cx="30" cy="30" r="6" fill="rgba(46,204,64,0.2)" stroke="#2ecc40" stroke-width="1.2"/>
+        <line x1="30" y1="4" x2="30" y2="12" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+        <line x1="30" y1="48" x2="30" y2="56" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+        <line x1="4" y1="30" x2="12" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+        <line x1="48" y1="30" x2="56" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+      </svg>
+      <h3>Research Details Coming Soon</h3>
+      <p>Detailed descriptions of our ongoing projects, methodologies, and findings will be added here. In the meantime, explore our publications or contact us directly.</p>
+      <a href="#" class="btn-outline" onclick="showSection('publications',document.querySelector('nav a:nth-child(3)')); return false;">View Publications</a>
+    </div>
+  </div>
+</div>
+
+<!-- =================== PUBLICATIONS SECTION =================== -->
+<div id="publications" class="section">
+  <div class="pub-section">
+    <div class="section-label">Research Output</div>
+    <h2 class="section-title">Publications</h2>
+
+    <!-- EDIT HERE — HOW TO ADD A NEW PUBLICATION
+         Copy one <div class="pub-card">...</div> block and paste it in the right year.
+         To add a new year group, copy a full <div class="pub-year-group">...</div> block.
+         Your name should always be wrapped in <strong>Mahata T</strong>
+    -->
+
+    <div class="pub-year-group">
+      <div class="pub-year">2025</div>
+      <div class="pub-card">
+        <div class="pub-title">Phage-encoded homing endonucleases attenuate bacterial immunity <span class="pub-preprint">Preprint</span></div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D.</div>
+        <div class="pub-journal">BioRxiv, 2025</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2024</div>
+      <div class="pub-card">
+        <div class="pub-title">Gamma-Mobile-Trio systems are mobile elements rich in bacterial defensive and offensive tools</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Kanarek K, Goren MG, Ragavan RM, Bosis E, Qimron U, Salomon D.</div>
+        <div class="pub-journal"><em>Nature Microbiology</em> 2024, 9, 3268&ndash;3283</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2023</div>
+      <div class="pub-card">
+        <div class="pub-title">Engineering mice for female-biased progeny without impacting genetic integrity and litter size <span class="pub-preprint">Preprint</span></div>
+        <div class="pub-authors">Yosef I, <strong>Mahata T</strong>, Chen Y, Bar-joseph H, Shalgi R, Munitz A, Gerlic M, Qimron U.</div>
+        <div class="pub-journal">BioRxiv, 2023</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">An efficient, scarless, selection-free technology for phage engineering</div>
+        <div class="pub-authors">Goren MG, <strong>Mahata T</strong>, Qimron U.</div>
+        <div class="pub-journal"><em>RNA Biology</em> 2023, 20(1), 830&ndash;835</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Inhibition of Host Cell Division by T5 protein 008 (Hdi)</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Molshanski-Mor S, Goren MG, Kohen-Manor M, Yosef I, Avram O, Salomon D, Qimron U.</div>
+        <div class="pub-journal"><em>Microbiology Spectrum</em> 2023, 11(6), e01697-23</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Highly active CRISPR adaptation proteins revealed by a robust enrichment technology</div>
+        <div class="pub-authors">Yosef I,&dagger; <strong>Mahata T</strong>,&dagger; Goren MG, Degany OJ, Ben-Shem A, Qimron U.</div>
+        <div class="pub-journal"><em>Nucleic Acids Research</em> 2023, 51(14), 7552&ndash;7562</div>
+        <div class="pub-equal">&dagger; Equal contributions</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2022</div>
+      <div class="pub-card">
+        <div class="pub-title">Thou shalt not cleave DNA &mdash; only repress transcription: A compact Cas protein representing a new CRISPR-Cas subtype</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Qimron U.</div>
+        <div class="pub-journal"><em>Molecular Cell</em> 2022, 82(23), 4403&ndash;4404</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Cleavage of Abasic Sites in DNA by an Aminoquinoxaline Compound. Augmented Cytotoxicity and DNA Damage in Combination with Chlorambucil in Human Colorectal Carcinoma Cells</div>
+        <div class="pub-authors">Mandi CS, <strong>Mahata T</strong>, Patra D, Chakraborty J, Bora A, Pal R, Dutta S.</div>
+        <div class="pub-journal"><em>ACS Omega</em> 2022, 7(8), 6488&ndash;6504</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2021</div>
+      <div class="pub-card">
+        <div class="pub-title">A phage mechanism for selective nicking of dUMP-containing DNA</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Molshanski-Mor S, Goren MG, Jana B, Kohen-Manor M, Yosef I, Avram O, Pupko T, Salomon D, Qimron U.</div>
+        <div class="pub-journal"><em>PNAS</em> 2021, 118(23), e2026354118</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Interaction of a Triantennary Quinoline Glycoconjugate with the Asialoglycoprotein Receptor</div>
+        <div class="pub-authors">Palit S,&dagger; Banerjee S,&dagger; <strong>Mahata T</strong>,&dagger; Niyogi S, Das T, Mandi CS, Chakrabarty P, Dutta S.</div>
+        <div class="pub-journal"><em>ChemMedChem</em> 2021, 16(14), 2211&ndash;2216</div>
+        <div class="pub-equal">&dagger; Equal contributions</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2019</div>
+      <div class="pub-card">
+        <div class="pub-title">Quinoxaline derivatives disrupt the base stacking of hepatitis C virus-internal ribosome entry site RNA: Reduce translation and replication</div>
+        <div class="pub-authors">Chakraborty J, Kanungo A, <strong>Mahata T</strong>, Kumar K, Sharma G, Pal R, Ahammed SK, Patra D, Majhi B, Chakrabarti S, Das S, Dutta S.</div>
+        <div class="pub-journal"><em>Chem. Commun.</em> 2019, 55, 14027&ndash;14030</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2018</div>
+      <div class="pub-card">
+        <div class="pub-title">Intercalator induced DNA superstructure formation: Doxorubicin and a synthetic quinoxaline derivative</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Chakraborty J, Kanungo A, Patra D, Basu G, Dutta S.</div>
+        <div class="pub-journal"><em>Biochemistry</em> 2018, 57(38), 5557&ndash;5563</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2016</div>
+      <div class="pub-card">
+        <div class="pub-title">The Benzyl Moiety in a Quinoxaline-Based Scaffold Acts as a DNA Intercalation Switch</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Kanungo A, Ganguly S, Modugula EK, Choudhury S, Pal SK, Basu G, Dutta S.</div>
+        <div class="pub-journal"><em>Angewandte Chemie</em> 2016, 55(27), 7733&ndash;7736</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year">2015</div>
+      <div class="pub-card">
+        <div class="pub-title">Synthesis of a visibly emissive 9-nitro-2,3-dihydro-1H-pyrimido[1,2-a]quinoxalin-5-amine scaffold with large Stokes shift and live cell imaging</div>
+        <div class="pub-authors">Kanungo A, Patra D, Mukherjee S, <strong>Mahata T</strong>, Maulik PR, Dutta S.</div>
+        <div class="pub-journal"><em>RSC Advances</em> 2015, 5(87), 70958&ndash;70967</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =================== TEAM SECTION =================== -->
+<div id="team" class="section">
+  <div class="team-section">
+    <div class="section-label">Our People</div>
+    <h2 class="section-title">The Team</h2>
+
+    <!-- ===== PRINCIPAL INVESTIGATOR ===== -->
+    <div class="pi-block">
+      <div class="hex-frame-wrap">
+        <div class="hex-frame">
+          <svg viewBox="0 0 200 220" fill="none">
+            <polygon points="100,4 192,52 192,148 100,196 8,148 8,52" fill="none" stroke="rgba(46,204,64,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+            <polygon points="100,14 182,60 182,150 100,196 18,150 18,60" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.5"/>
+            <polygon points="100,22 174,66 174,144 100,188 26,144 26,66" fill="none" stroke="rgba(46,204,64,0.12)" stroke-width="0.8"/>
+            <line x1="100" y1="14" x2="100" y2="50" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="182" y1="60" x2="150" y2="78" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="182" y1="150" x2="150" y2="132" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="100" y1="196" x2="100" y2="160" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="18" y1="150" x2="50" y2="132" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="18" y1="60" x2="50" y2="78" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <circle cx="100" cy="105" r="38" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.15)" stroke-width="0.8"/>
+          </svg>
+          <!-- EDIT HERE — PI PHOTO
+               STEP 1: Put your photo file (e.g. tridib.jpg) in the "images" folder.
+               STEP 2: Delete the 4 lines below (the svg icon + placeholder text)
+               STEP 3: Paste this instead (adjust the filename):
+               <img src="images/tridib.jpg" alt="Prof. Tridib Mahata"
+                 style="position:absolute;inset:0;width:100%;height:100%;
+                 object-fit:cover;clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);">
+          -->
+          <div class="hex-img-placeholder">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span class="hex-placeholder-text">Photo<br>Coming Soon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pi-details">
+        <!-- EDIT HERE — PI title badge -->
+        <div class="pi-title-tag">Principal Investigator</div>
+        <!-- EDIT HERE — PI full name -->
+        <h2 class="pi-name">Tridib Mahata, Ph.D.</h2>
+        <!-- EDIT HERE — PI roles (add/remove lines as needed) -->
+        <p class="pi-role">Assistant Professor</p>
+        <p class="pi-role">School of Biological Sciences, NISER Bhubaneswar</p>
+        <!-- EDIT HERE — PI email -->
+        <a class="pi-email" href="mailto:tridibmahata@niser.ac.in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          tridibmahata@niser.ac.in
+        </a>
+        <!-- EDIT HERE — PI BIOGRAPHY
+             Delete the placeholder line below and type the biography directly.
+             Example: Prof. Tridib Mahata completed his Ph.D. from...
+             You can use <b>bold</b> or <br> for line breaks inside the text.
+        -->
+        <div class="pi-bio-area">
+          <span class="pi-bio-placeholder">[ Biography and research interests of Prof. Mahata — add text here ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-divider"></div>
+    <div class="phd-section-title">PhD Students</div>
+
+    <!-- ===== STUDENT: SAMCHITA ===== -->
+    <div class="student-card">
+      <div class="hex-frame-sm">
+        <svg viewBox="0 0 140 155" fill="none">
+          <polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"/>
+          <polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"/>
+          <polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"/>
+          <line x1="70" y1="12" x2="70" y2="40" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="125" y1="44" x2="100" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="125" y1="104" x2="100" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="70" y1="136" x2="70" y2="108" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="15" y1="104" x2="40" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="15" y1="44" x2="40" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"/>
+        </svg>
+        <!-- EDIT HERE — SAMCHITA PHOTO
+             STEP 1: Put sammy.jpg in the "images" folder.
+             STEP 2: Delete the placeholder div below and paste:
+             <img src="images/sammy.jpg" alt="Samchita Sarangi"
+               style="position:absolute;inset:0;width:100%;height:100%;
+               object-fit:cover;clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);">
+        -->
+        <div class="hex-img-placeholder">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span>
+        </div>
+      </div>
+      <div class="student-details">
+        <!-- EDIT HERE — Samchita's details -->
+        <div class="student-name">Samchita Sarangi</div>
+        <div class="student-nickname">( Sammy )</div>
+        <div class="student-degree">M.Sc.</div>
+        <div class="student-role-badge">PhD Student</div>
+        <!-- EDIT HERE — Samchita bio: delete placeholder and type directly -->
+        <div class="student-bio-area">
+          <span class="pi-bio-placeholder">[ Short bio or research focus for Samchita — add text here ]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STUDENT: LALITMOHAN ===== -->
+    <div class="student-card">
+      <div class="hex-frame-sm">
+        <svg viewBox="0 0 140 155" fill="none">
+          <polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"/>
+          <polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"/>
+          <polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"/>
+          <line x1="70" y1="12" x2="70" y2="40" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="125" y1="44" x2="100" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="125" y1="104" x2="100" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="70" y1="136" x2="70" y2="108" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="15" y1="104" x2="40" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <line x1="15" y1="44" x2="40" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+          <circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"/>
+        </svg>
+        <!-- EDIT HERE — LALITMOHAN PHOTO
+             STEP 1: Put lalit.jpg in the "images" folder.
+             STEP 2: Delete the placeholder div below and paste:
+             <img src="images/lalit.jpg" alt="Lalitmohan Kar"
+               style="position:absolute;inset:0;width:100%;height:100%;
+               object-fit:cover;clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);">
+        -->
+        <div class="hex-img-placeholder">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span>
+        </div>
+      </div>
+      <div class="student-details">
+        <!-- EDIT HERE — Lalitmohan's details -->
+        <div class="student-name">Lalitmohan Kar</div>
+        <div class="student-nickname">( Lalit )</div>
+        <div class="student-degree">M.Sc.</div>
+        <div class="student-role-badge">PhD Student</div>
+        <!-- EDIT HERE — Lalit bio: delete placeholder and type directly -->
+        <div class="student-bio-area">
+          <span class="pi-bio-placeholder">[ Short bio or research focus for Lalitmohan — add text here ]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT HERE — ADD A NEW STUDENT
+         Copy the entire block below (from "STUDENT TEMPLATE START" to "STUDENT TEMPLATE END")
+         and paste it above this comment. Then fill in the name, nickname, degree, and bio.
+
+         === STUDENT TEMPLATE START ===
+         <div class="student-card">
+           <div class="hex-frame-sm">
+             <svg viewBox="0 0 140 155" fill="none">
+               <polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"/>
+               <polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"/>
+               <circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"/>
+             </svg>
+             <div class="hex-img-placeholder">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+               <span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span>
+             </div>
+           </div>
+           <div class="student-details">
+             <div class="student-name">Student Full Name</div>
+             <div class="student-nickname">( Nickname )</div>
+             <div class="student-degree">M.Sc.</div>
+             <div class="student-role-badge">PhD Student</div>
+             <div class="student-bio-area">Write a short bio here...</div>
+           </div>
+         </div>
+         === STUDENT TEMPLATE END ===
+    -->
+
+  </div>
+</div>
+
+<!-- =================== CONTACT SECTION =================== -->
+<div id="contact" class="section">
+  <div class="contact-section">
+    <div>
+      <div class="section-label" style="margin-bottom:12px;">Get In Touch</div>
+      <!-- EDIT HERE — Contact page lab name and tagline -->
+      <div class="contact-lab-name">Mahata Lab</div>
+      <div class="contact-tagline">Phage&ndash;Bacteria Interaction Lab</div>
+
+      <!-- EDIT HERE — Contact details. Edit the text inside each <div class="contact-value"> -->
+      <div class="contact-detail-block">
+        <div class="contact-label">Principal Investigator</div>
+        <div class="contact-value">Prof. Tridib Mahata</div>
+      </div>
+      <div class="contact-detail-block">
+        <div class="contact-label">Laboratory</div>
+        <div class="contact-value">Phage Bacteria Interaction Lab<br>School of Biological Sciences</div>
+      </div>
+      <div class="contact-detail-block">
+        <div class="contact-label">Location</div>
+        <div class="contact-value">
+          Rooms 422 and 423<br>
+          National Institute of Science Education and Research<br>
+          Bhubaneswar, Jatni, Khordha<br>
+          Odisha, India &mdash; 752050
+        </div>
+      </div>
+      <div class="contact-detail-block">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:tridibmahata@niser.ac.in">tridibmahata@niser.ac.in</a></div>
+      </div>
+      <div class="contact-detail-block">
+        <div class="contact-label">Join the Lab</div>
+        <!-- EDIT HERE — Edit this joining message -->
+        <div class="contact-value" style="font-size:0.85rem;">We welcome motivated students and researchers interested in phage&ndash;bacteria interactions, microbial genetics, and molecular biology. Reach out via email with your CV and a brief statement of interest.</div>
+      </div>
+    </div>
+
+    <div class="contact-logo-area">
+      <svg width="90" height="100" viewBox="0 0 38 44" fill="none">
+        <polygon points="19,2 31,9 31,23 19,30 7,23 7,9" fill="none" stroke="#2ecc40" stroke-width="1.5"/>
+        <polygon points="19,4 29,10 29,22 19,28 9,22 9,10" fill="rgba(46,204,64,0.1)" stroke="#2ecc40" stroke-width="0.6"/>
+        <rect x="16.5" y="28" width="5" height="3.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+        <rect x="14" y="31.5" width="10" height="2.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+        <line x1="14" y1="34" x2="7" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+        <line x1="16" y1="34" x2="11" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+        <line x1="24" y1="34" x2="31" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+        <line x1="22" y1="34" x2="27" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+        <circle cx="19" cy="16" r="4" fill="none" stroke="rgba(46,204,64,0.35)" stroke-width="0.8" stroke-dasharray="2,2"/>
+      </svg>
+      <div style="text-align:center;">
+        <div style="font-size:1rem;font-weight:900;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);">Mahata Lab</div>
+        <div style="font-size:0.65rem;color:var(--green-accent);font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-top:3px;">NISER Bhubaneswar</div>
+      </div>
+
+      <!-- EDIT HERE — MAP / DIRECTIONS
+           OPTION A: Replace this entire block with a Google Maps embed.
+           Go to maps.google.com → search NISER Bhubaneswar, Jatni
+           → Share → Embed a map → copy the iframe code
+           Paste it here in place of the <div class="contact-map-placeholder">...</div>
+
+           OPTION B: Leave as-is for now.
+      -->
+      <div class="contact-map-placeholder">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="rgba(46,204,64,0.3)"/></svg>
+        <p>Map / Directions</p>
+        <p style="font-size:0.62rem;color:rgba(46,204,64,0.3);">NISER Bhubaneswar, Jatni, Odisha 752050</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== PICTURES SECTION =================== -->
+<div id="pictures" class="section">
+  <div class="pictures-section">
+    <div class="section-label">Gallery</div>
+    <h2 class="section-title">Pictures</h2>
+
+    <!-- EDIT HERE — GALLERY / PICTURES PAGE
+         Replace the <div class="pictures-coming">...</div> block below
+         with a photo grid. Example (add as many <img> tags as you want):
+
+         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px;">
+           <img src="images/lab-photo-1.jpg" alt="Lab"
+             style="width:100%;height:220px;object-fit:cover;border:1px solid rgba(46,204,64,0.2);">
+           <img src="images/lab-photo-2.jpg" alt="Team"
+             style="width:100%;height:220px;object-fit:cover;border:1px solid rgba(46,204,64,0.2);">
+           <img src="images/conference.jpg" alt="Conference"
+             style="width:100%;height:220px;object-fit:cover;border:1px solid rgba(46,204,64,0.2);">
+         </div>
+
+         To add a YOUTUBE VIDEO in the gallery:
+         <iframe width="100%" height="420"
+           src="https://www.youtube.com/embed/PASTE-VIDEO-ID-HERE"
+           frameborder="0" allowfullscreen
+           style="margin-top:24px;border:1px solid rgba(46,204,64,0.2)"></iframe>
+
+         To add a LOCAL VIDEO FILE (.mp4):
+         <video width="100%" controls style="margin-top:24px;">
+           <source src="images/lab-video.mp4" type="video/mp4">
+         </video>
+    -->
+    <div class="pictures-coming">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="rgba(46,204,64,0.3)" stroke-width="1.2"/>
+        <circle cx="8.5" cy="8.5" r="1.5" fill="rgba(46,204,64,0.4)"/>
+        <path d="M21 15l-5-5L5 21" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 style="font-size:1.4rem;font-weight:700;color:var(--white);">Gallery Coming Soon</h3>
+      <p style="color:var(--gray);font-size:0.9rem;max-width:420px;line-height:1.7;">Photos of the lab, team events, conferences, and experiments will be displayed here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- =================== JAVASCRIPT =================== -->
+<!-- Do NOT edit below this line unless you know JavaScript -->
+<script>
+
+// ===== NAVIGATION — handles tab switching =====
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  var sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('nav a').forEach(function(a) {
+    a.classList.remove('active');
+  });
+  if (el && el.classList) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== HERO CANVAS — floating phage + bacteria background =====
+(function() {
+  var canvas = document.getElementById('phage-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [], bacteria = [];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function drawPhage(x, y, size, angle, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = '#2ecc40';
+    ctx.lineWidth = 0.8;
+    ctx.fillStyle = 'rgba(46,204,64,0.07)';
+    ctx.beginPath();
+    for (var i = 0; i < 6; i++) {
+      var a = (Math.PI / 3) * i - Math.PI / 6;
+      if (i === 0) ctx.moveTo(Math.cos(a)*size, Math.sin(a)*size);
+      else ctx.lineTo(Math.cos(a)*size, Math.sin(a)*size);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(-size*0.25, size*0.85, size*0.5, size*0.5);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(-size*0.45, size*1.35, size*0.9, size*0.22);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(46,204,64,0.35)';
+    [[-0.45,1.57,-0.9,2.1],[-0.2,1.57,-0.5,2.1],[0.45,1.57,0.9,2.1],[0.2,1.57,0.5,2.1]].forEach(function(f){
+      ctx.beginPath(); ctx.moveTo(f[0]*size,f[1]*size); ctx.lineTo(f[2]*size,f[3]*size); ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function drawBacterium(x, y, w, h, angle, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = 'rgba(46,204,64,0.22)';
+    ctx.lineWidth = 0.8;
+    ctx.setLineDash([3,2]);
+    ctx.beginPath(); ctx.ellipse(0,0,w+4,h+3,0,0,Math.PI*2); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(10,40,10,0.5)';
+    ctx.strokeStyle = 'rgba(46,204,64,0.35)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(0,0,w,h,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = 'rgba(46,204,64,0.15)';
+    ctx.lineWidth = 0.6;
+    ctx.beginPath(); ctx.ellipse(0,0,w*0.7,h*0.68,0,0,Math.PI*2); ctx.stroke();
+    ctx.fillStyle = 'rgba(46,204,64,0.07)';
+    ctx.beginPath(); ctx.ellipse(0,0,w*0.38,h*0.38,0,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  for (var i = 0; i < 18; i++) {
+    particles.push({ x:Math.random()*1200, y:Math.random()*900, size:8+Math.random()*14,
+      vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4,
+      angle:Math.random()*Math.PI*2, va:(Math.random()-0.5)*0.01, alpha:0.3+Math.random()*0.5 });
+  }
+  for (var j = 0; j < 6; j++) {
+    bacteria.push({ x:Math.random()*1200, y:Math.random()*900, w:30+Math.random()*25, h:12+Math.random()*8,
+      vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2,
+      angle:Math.random()*Math.PI*2, va:(Math.random()-0.5)*0.005, alpha:0.4+Math.random()*0.3 });
+  }
+
+  function animateHero() {
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(function(p,idx) {
+      particles.slice(idx+1).forEach(function(p2) {
+        var dx=p.x-p2.x, dy=p.y-p2.y, dist=Math.sqrt(dx*dx+dy*dy);
+        if (dist<180) {
+          ctx.save(); ctx.globalAlpha=(1-dist/180)*0.06;
+          ctx.strokeStyle='#2ecc40'; ctx.lineWidth=0.5;
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p2.x,p2.y); ctx.stroke(); ctx.restore();
+        }
+      });
+    });
+    bacteria.forEach(function(b) {
+      b.x+=b.vx; b.y+=b.vy; b.angle+=b.va;
+      if(b.x<-50) b.x=W+50; if(b.x>W+50) b.x=-50;
+      if(b.y<-50) b.y=H+50; if(b.y>H+50) b.y=-50;
+      drawBacterium(b.x,b.y,b.w,b.h,b.angle,b.alpha);
+    });
+    particles.forEach(function(p) {
+      p.x+=p.vx; p.y+=p.vy; p.angle+=p.va;
+      if(p.x<-40) p.x=W+40; if(p.x>W+40) p.x=-40;
+      if(p.y<-40) p.y=H+40; if(p.y>H+40) p.y=-40;
+      drawPhage(p.x,p.y,p.size,p.angle,p.alpha);
+    });
+    requestAnimationFrame(animateHero);
+  }
+  animateHero();
+})();
+
+// ===== INTERACTION CANVAS — phage infection animation =====
+(function() {
+  var canvas = document.getElementById('interaction-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var t = 0, state = 0, stateT = 0;
+  var stateDurations = [180, 80, 200, 120, 100];
+  var burstParticles = [], burstInitialized = false;
+
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  function easeInOut(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; }
+
+  function drawPhageAt(cx, cy, angle, size, alpha, injecting, injectP) {
+    ctx.save();
+    ctx.translate(cx,cy); ctx.rotate(angle); ctx.globalAlpha=alpha; ctx.lineWidth=1.3;
+    if (injecting) {
+      var g=ctx.createRadialGradient(0,0,0,0,0,size*1.6);
+      g.addColorStop(0,'rgba(57,255,20,0.18)'); g.addColorStop(1,'transparent');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(0,0,size*1.6,0,Math.PI*2); ctx.fill();
+    }
+    ctx.strokeStyle='#2ecc40'; ctx.fillStyle=injecting?'rgba(46,204,64,0.22)':'rgba(46,204,64,0.1)';
+    ctx.beginPath();
+    for(var i=0;i<6;i++){
+      var a=(Math.PI/3)*i-Math.PI/6;
+      if(i===0) ctx.moveTo(Math.cos(a)*size,Math.sin(a)*size);
+      else ctx.lineTo(Math.cos(a)*size,Math.sin(a)*size);
+    }
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle='#2ecc40';
+    ctx.beginPath(); ctx.rect(-size*0.28,size*0.85,size*0.56,size*0.55); ctx.stroke();
+    ctx.beginPath(); ctx.rect(-size*0.45,size*1.4,size*0.9,size*0.25); ctx.stroke();
+    ctx.strokeStyle='rgba(46,204,64,0.55)'; ctx.lineWidth=0.9;
+    var sp=injecting?1.4:1.0;
+    [[-0.45,1.65,-0.8*sp,2.2],[-0.2,1.65,-0.35*sp,2.2],[0.45,1.65,0.8*sp,2.2],[0.2,1.65,0.35*sp,2.2]].forEach(function(f){
+      ctx.beginPath(); ctx.moveTo(f[0]*size,f[1]*size); ctx.lineTo(f[2]*size,f[3]*size); ctx.stroke();
+    });
+    if (injecting && injectP > 0) {
+      ctx.save(); ctx.globalAlpha=alpha*0.85;
+      var sl=size*2*injectP;
+      var grad=ctx.createLinearGradient(0,size*1.65,0,size*1.65+sl);
+      grad.addColorStop(0,'#39ff14'); grad.addColorStop(1,'rgba(57,255,20,0)');
+      ctx.strokeStyle=grad; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.moveTo(0,size*1.65); ctx.lineTo(0,size*1.65+sl); ctx.stroke(); ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function drawEcoli(cx, cy, rx, ry, infected, alpha) {
+    ctx.save(); ctx.globalAlpha=alpha;
+    if (infected>0) {
+      var g=ctx.createRadialGradient(cx,cy,0,cx,cy,rx*1.5);
+      g.addColorStop(0,'rgba(57,255,20,'+(infected*0.14)+')'); g.addColorStop(1,'transparent');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.ellipse(cx,cy,rx*1.5,ry*1.5,0,0,Math.PI*2); ctx.fill();
+    }
+    ctx.save();
+    ctx.strokeStyle=infected>0.5?'rgba(57,255,20,0.55)':'rgba(46,204,64,0.35)';
+    ctx.lineWidth=1.8; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx+7,ry+5,0,0,Math.PI*2); ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+    ctx.save(); ctx.strokeStyle='rgba(46,204,64,0.22)'; ctx.lineWidth=0.7;
+    for(var i=0;i<18;i++){
+      var ang=(Math.PI*2/18)*i;
+      var ex=cx+Math.cos(ang)*(rx+7), ey=cy+Math.sin(ang)*(ry+5);
+      ctx.beginPath(); ctx.moveTo(ex,ey); ctx.lineTo(ex+Math.cos(ang)*4,ey+Math.sin(ang)*4); ctx.stroke();
+    }
+    ctx.restore();
+    ctx.fillStyle='rgba(5,25,5,'+(0.5+infected*0.2)+')';
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle=infected>0.5?'#39ff14':'#2ecc40'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2); ctx.stroke();
+    ctx.strokeStyle='rgba(46,204,64,0.18)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx-6,ry-5,0,0,Math.PI*2); ctx.stroke();
+    ctx.strokeStyle='rgba(46,204,64,'+(0.35+infected*0.3)+')'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx-11,ry-9,0,0,Math.PI*2); ctx.stroke();
+    ctx.fillStyle='rgba(10,46,10,'+(0.55+infected*0.25)+')';
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx-12,ry-10,0,0,Math.PI*2); ctx.fill();
+    ctx.save();
+    ctx.fillStyle='rgba(57,255,20,'+(0.06+infected*0.1)+')';
+    ctx.strokeStyle='rgba(46,204,64,'+(0.2+infected*0.2)+')'; ctx.lineWidth=0.8;
+    ctx.beginPath(); ctx.ellipse(cx-rx*0.05,cy,rx*0.38,ry*0.42,0.3,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.restore();
+    ctx.save(); ctx.fillStyle='rgba(46,204,64,'+(0.3+infected*0.2)+')';
+    for(var r=0;r<12;r++){
+      var ra=(Math.PI*2/12)*r+0.4;
+      ctx.beginPath(); ctx.arc(cx+Math.cos(ra)*(rx-15)*0.55, cy+Math.sin(ra)*(ry-11)*0.55, 1.2, 0, Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+    ctx.save(); ctx.strokeStyle='rgba(46,204,64,0.3)'; ctx.lineWidth=0.8;
+    [-0.5,0.3,1.1,1.9,2.7,3.5,4.3,5.1].forEach(function(a){
+      var px=cx+Math.cos(a)*rx, py=cy+Math.sin(a)*ry;
+      ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(px+Math.cos(a)*10,py+Math.sin(a)*10); ctx.stroke();
+    });
+    ctx.restore();
+    ctx.save(); ctx.strokeStyle='rgba(46,204,64,'+(0.28-infected*0.15)+')'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx+rx,cy-5);
+    ctx.bezierCurveTo(cx+rx+18,cy-18,cx+rx+28,cy+8,cx+rx+44,cy-2);
+    ctx.bezierCurveTo(cx+rx+56,cy-10,cx+rx+62,cy+6,cx+rx+72,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+rx,cy+5);
+    ctx.bezierCurveTo(cx+rx+14,cy+20,cx+rx+26,cy-4,cx+rx+42,cy+12);
+    ctx.bezierCurveTo(cx+rx+55,cy+22,cx+rx+65,cy+5,cx+rx+74,cy+14); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-rx,cy);
+    ctx.bezierCurveTo(cx-rx-16,cy+15,cx-rx-28,cy-8,cx-rx-44,cy+5);
+    ctx.bezierCurveTo(cx-rx-56,cy+15,cx-rx-64,cy-2,cx-rx-74,cy+8); ctx.stroke();
+    ctx.restore();
+    ctx.restore();
+  }
+
+  function initBurst(cx,cy) {
+    burstParticles=[];
+    for(var i=0;i<24;i++){
+      var angle=(Math.PI*2/24)*i+Math.random()*0.3, speed=1.5+Math.random()*3;
+      burstParticles.push({ x:cx, y:cy, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+        life:1, decay:0.015+Math.random()*0.02, size:3+Math.random()*7, isPhage:i%4===0 });
+    }
+  }
+
+  function animateInteraction() {
+    ctx.clearRect(0,0,W,H);
+    t++; stateT++;
+    var totalDur=stateDurations[state];
+    var progress=Math.min(stateT/totalDur,1);
+    if(stateT>=totalDur){ state=(state+1)%stateDurations.length; stateT=0; burstInitialized=false; }
+
+    var BX=W*0.54, BY=H*0.58;
+    var PLX=BX+38, PLY=BY-55;
+    var PSX=W*0.82, PSY=H*0.18;
+    var infected=0, bAlpha=1;
+    var bRX=Math.min(W*0.17,85), bRY=Math.min(H*0.14,52);
+
+    if(state===2) infected=progress*0.6;
+    if(state===3) infected=0.6+progress*0.4;
+    if(state===4){ infected=1; bAlpha=1-progress; bRX+=progress*25; bRY+=progress*18; }
+
+    if(state!==4||!burstInitialized) drawEcoli(BX,BY,bRX,bRY,infected,bAlpha);
+
+    if(state===4){
+      if(!burstInitialized){ initBurst(BX,BY); burstInitialized=true; }
+      burstParticles.forEach(function(p){
+        p.x+=p.vx; p.y+=p.vy; p.life-=p.decay;
+        if(p.life<=0) return;
+        ctx.save(); ctx.globalAlpha=p.life*0.9;
+        if(p.isPhage) drawPhageAt(p.x,p.y,Math.atan2(p.vy,p.vx)+Math.PI/2,p.size,p.life*0.8,false,0);
+        else{ ctx.fillStyle='#2ecc40'; ctx.beginPath(); ctx.arc(p.x,p.y,p.size*0.3,0,Math.PI*2); ctx.fill(); }
+        ctx.restore();
+      });
+    }
+
+    var phageX, phageY, phageAngle, phageAlpha=1;
+    var phageSize=Math.min(W,H)*0.06;
+    var injecting=false, injectP=0;
+
+    if(state===0){ var ep=easeInOut(progress); phageX=lerp(PSX,PLX*1.3,ep); phageY=lerp(PSY,PLY*0.6,ep); phageAngle=lerp(-Math.PI*0.1,Math.PI*0.15,ep); }
+    else if(state===1){ var ep2=easeInOut(progress); phageX=lerp(PLX*1.3,PLX,ep2); phageY=lerp(PLY*0.6,PLY,ep2); phageAngle=lerp(Math.PI*0.15,Math.PI*0.18,ep2); }
+    else if(state===2){ phageX=PLX; phageY=PLY; phageAngle=Math.PI*0.18; injecting=true; injectP=progress; }
+    else if(state===3){ phageX=PLX; phageY=PLY; phageAngle=Math.PI*0.18; injecting=true; injectP=1; }
+    else if(state===4){ phageX=PLX; phageY=PLY; phageAngle=Math.PI*0.18; phageAlpha=1-progress; }
+
+    if(state<4||(state===4&&phageAlpha>0)) drawPhageAt(phageX,phageY,phageAngle,phageSize,phageAlpha,injecting,injectP);
+
+    var labels=['Phage approaching...','Attaching to receptor...','Injecting DNA...','Host hijacked!','Cell lysis — new phages released!'];
+    ctx.save(); ctx.globalAlpha=0.65;
+    ctx.font='600 '+Math.max(10,W*0.025)+'px Montserrat,sans-serif';
+    ctx.fillStyle='#2ecc40'; ctx.textAlign='center';
+    ctx.fillText(labels[state], W/2, 26);
+    ctx.restore();
+
+    requestAnimationFrame(animateInteraction);
+  }
+  animateInteraction();
+})();
+
+</script>
+</body>
+</html>

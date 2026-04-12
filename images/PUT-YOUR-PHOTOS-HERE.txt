@@ -1,0 +1,12 @@
+Put all your photo and video files in this folder.
+
+Recommended filenames:
+  tridib.jpg        - PI photo
+  sammy.jpg         - Samchita's photo
+  lalit.jpg         - Lalitmohan's photo
+  niser-logo.png    - NISER logo
+  lab-photo-1.jpg   - Lab/team photos
+  lab-video.mp4     - Any lab video
+
+In index.html, reference them as:
+  src="images/tridib.jpg"
