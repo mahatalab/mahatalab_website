@@ -72,10 +72,10 @@ nav a.active{color:var(--green-accent);}
 .section-label{font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--green-accent);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .section-label::before{content:'';display:block;width:32px;height:1px;background:var(--green-accent);}
 .section-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:900;letter-spacing:-0.02em;margin-bottom:40px;line-height:1.1;}
-.objective-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;min-height:400px;}
+.objective-grid{display:flex;flex-direction:row;gap:48px;align-items:flex-start;width:100%;}.objective-left{flex:1;min-width:0;}.objective-anim-wrap{flex:1;min-width:0;}
 .objective-text{font-size:1rem;font-weight:300;line-height:1.9;color:var(--gray);padding-left:28px;border-left:2px solid var(--green-accent);}
-.objective-anim-box{position:relative;height:380px;border:1px solid rgba(46,204,64,0.2);background:rgba(0,0,0,0.5);overflow:hidden;}
-#interaction-canvas{width:100%;height:100%;display: block;}
+.objective-anim-box{position:relative;height:380px;border:1px solid rgba(46,204,64,0.2);background:rgba(0,0,0,0.5);overflow:hidden;width:100%;}
+#interaction-canvas{width:100%;height:100%;}
 .anim-label{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:0.68rem;letter-spacing:0.2em;color:var(--green-accent);text-transform:uppercase;opacity:0.7;}
 
 /* FOCUS */
@@ -192,7 +192,7 @@ nav a.active{color:var(--green-accent);}
   .hero-animation{display:none;}
   .objective-section,.focus-section,.team-section,.research-section,.pictures-section{padding:60px 28px;}
   .contact-section,.pub-section{padding:60px 28px;}
-  .focus-grid,.contact-section{grid-template-columns:1fr;}
+  .focus-grid,.contact-section{grid-template-columns:1fr;}.objective-grid{flex-direction:column;}
   .pi-block,.student-card{grid-template-columns:1fr;}
   .site-footer{grid-template-columns:1fr;text-align:center;padding:40px 28px;}
   .footer-logos{justify-content:center;}
@@ -276,7 +276,7 @@ nav a.active{color:var(--green-accent);}
     <div class="hero-content">
 
       <!-- EDIT HERE — Short tagline below the line -->
-      <p class="hero-eyebrow">Bacterial and Phage Genetics</p>
+      <p class="hero-eyebrow">Microbiology &middot; Genomics &middot; Biochemistry</p>
 
       <!-- EDIT HERE — Main headline. Words inside <span> appear in green. -->
       <h1 class="hero-title">
@@ -308,7 +308,7 @@ nav a.active{color:var(--green-accent);}
     <div class="section-label">Our Mission</div>
     <h2 class="section-title">Lab Objective</h2>
     <div class="objective-grid">
-      <div>
+      <div class="objective-left">
         <!-- EDIT HERE — Lab objective text -->
         <p class="objective-text">
           Our lab explores the fascinating molecular conflict between bacteria and
@@ -316,29 +316,17 @@ nav a.active{color:var(--green-accent);}
           ongoing for billions of years. Our aim is to uncover fundamental mechanisms
           of microbial warfare: how phages take over their bacterial hosts and how
           bacteria defend themselves against phage attack.<br><br>
-          Using a combination of microbial genetics, molecular biology, and
+          Using a combination of microbial genetics, molecular biology, genomics, and
           biochemistry, we investigate these interactions and translate our discoveries
           into innovative tools for biotechnology and medicine.
         </p>
-      <div>
-      <div class="objective-anim-box" style="position:relative;">
-  <canvas id="interaction-canvas"></canvas>
-
-  <div style="
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    color:#2ecc40;
-    font-family:monospace;
-    letter-spacing:2px;
-    font-size:14px;
-  
-  ">
-    LYTIC PHAGE LIFE CYCLE
-  </div>
-
-</div>
+      </div>
+      <div class="objective-anim-wrap">
+        <div class="objective-anim-box">
+          <canvas id="interaction-canvas"></canvas>
+          <div class="anim-label">Live simulation &mdash; Phage&ndash;Bacteria Interaction</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -350,7 +338,7 @@ nav a.active{color:var(--green-accent);}
 
       <!-- EDIT HERE — Focus card 1: change title and description text -->
       <div class="focus-card">
-        <div class="focus-number">01 </div>
+        <div class="focus-number">01 &mdash; Discovery</div>
         <svg class="focus-icon" viewBox="0 0 72 72" fill="none">
           <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
           <path d="M36 12 L52 20 L52 40 C52 52 36 60 36 60 C36 60 20 52 20 40 L20 20 Z" fill="rgba(46,204,64,0.12)" stroke="#2ecc40" stroke-width="1.5"/>
@@ -361,13 +349,13 @@ nav a.active{color:var(--green-accent);}
           <line x1="30" y1="44" x2="42" y2="44" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
         </svg>
         <h3 class="focus-title">Discovery of Novel Bacterial Immune Systems</h3>
-        <p class="focus-desc">We explore pathogenic bacterial genomic DNA  &mdash; mobile genomic island and environmental &mdash; metagenome to discover new bacterial immune systems. Understanding these systems may reveal evolutionary parallels to human immune pathways.</p>
+        <p class="focus-desc">We explore the GMT mobile genomic island &mdash; a hotspot of bacterial defense systems &mdash; along with other defense islands and environmental microbiomes, to discover new anti-phage systems. Understanding these systems may reveal evolutionary parallels to human immune pathways.</p>
         <div class="focus-card-accent"></div>
       </div>
 
       <!-- EDIT HERE — Focus card 2 -->
       <div class="focus-card">
-        <div class="focus-number">02 </div>
+        <div class="focus-number">02 &mdash; Mechanisms</div>
         <svg class="focus-icon" viewBox="0 0 72 72" fill="none">
           <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
           <polygon points="36,10 46,17 46,30 36,37 26,30 26,17" fill="rgba(46,204,64,0.15)" stroke="#2ecc40" stroke-width="1.5"/>
@@ -386,7 +374,7 @@ nav a.active{color:var(--green-accent);}
 
       <!-- EDIT HERE — Focus card 3 -->
       <div class="focus-card">
-        <div class="focus-number">03 </div>
+        <div class="focus-number">03 &mdash; Therapeutics</div>
         <svg class="focus-icon" viewBox="0 0 72 72" fill="none">
           <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
           <ellipse cx="36" cy="42" rx="18" ry="12" fill="rgba(46,204,64,0.1)" stroke="#2ecc40" stroke-width="1.5"/>
@@ -649,11 +637,10 @@ nav a.active{color:var(--green-accent);}
                  style="position:absolute;inset:0;width:100%;height:100%;
                  object-fit:cover;clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);">
           -->
-       <div class="hex-img">
- <img src="images/tridib.jpg" alt="Prof. Tridib Mahata"
-                 style="position:absolute;inset:0;width:100%;height:100%;
-                 object-fit:cover;clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);">
-           </div>
+          <div class="hex-img-placeholder">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span class="hex-placeholder-text">Photo<br>Coming Soon</span>
+          </div>
         </div>
       </div>
 
@@ -897,23 +884,18 @@ nav a.active{color:var(--green-accent);}
            <source src="images/lab-video.mp4" type="video/mp4">
          </video>
     -->
-<div style="margin-top:40px; text-align:center;">
-      <video controls preload="auto" style="width:100%; max-width:700px; background:black;">
-        
-        <!-- IMPORTANT: absolute path -->
-        <source src="/mahatalab_website/images/Ecoli.mp4" type="video/mp4">
-        
-        Your browser does not support the video tag.
-      </video>
-
-      <p style="margin-top:12px; color:#b0c4b0;">
-        <em>E. coli</em> infected with T5.008 protein (Host division inhibitor)
-      </p>
+    <div class="pictures-coming">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="rgba(46,204,64,0.3)" stroke-width="1.2"/>
+        <circle cx="8.5" cy="8.5" r="1.5" fill="rgba(46,204,64,0.4)"/>
+        <path d="M21 15l-5-5L5 21" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 style="font-size:1.4rem;font-weight:700;color:var(--white);">Gallery Coming Soon</h3>
+      <p style="color:var(--gray);font-size:0.9rem;max-width:420px;line-height:1.7;">Photos of the lab, team events, conferences, and experiments will be displayed here.</p>
     </div>
-
   </div>
 </div>
- 
+
 <!-- =================== JAVASCRIPT =================== -->
 <!-- Do NOT edit below this line unless you know JavaScript -->
 <script>
