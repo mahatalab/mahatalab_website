@@ -883,27 +883,43 @@ nav a.active{color:var(--green-accent);}
            <source src="images/lab-video.mp4" type="video/mp4">
          </video>
     -->
-    <div class="pictures-coming">
+   <div id="pictures" class="section">
+  <div class="pictures-section">
+    <div class="section-label">Gallery</div>
+    <h2 class="section-title">Pictures</h2>
 
-  <video style="width:100%; max-width:600px; border-radius:10px;" 
-       autoplay muted playsinline loop preload="auto" controls>
-    <source src="images/Ecoli.mp4" type="video/mp4">
-
-  </video>
-
-  <p style="
-    margin-top:12px;
-    font-family:'Montserrat', sans-serif;
-    font-weight:300;
-    font-size:0.95rem;
-    color:var(--gray);
-    max-width:600px;
-    line-height:1.6;
-  ">
-    E. coli infected with T5.008 protein (Host division inhibitor) affects the FtsZ protein.
-  </p>
-
-</div>
+    <!-- VIDEO 1 -->
+    <div style="margin-top: 40px;">
+      <video
+        autoplay
+        muted
+        playsinline
+        loop
+        controls
+        preload="auto"
+        style="
+          display: block;
+          width: 100%;
+          max-width: 700px;
+          border: 1px solid rgba(46,204,64,0.25);
+          background: #000;
+        "
+        onerror="this.style.border='2px solid red'; this.insertAdjacentHTML('afterend','<p style=color:red>Video failed to load — check filename and path</p>')">
+        <source src="images/Ecoli.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p style="
+        margin-top: 14px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 0.95rem;
+        color: var(--gray);
+        max-width: 700px;
+        line-height: 1.6;
+      ">
+        <em>E. coli</em> infected with T5.008 protein (Host division inhibitor) affects the FtsZ protein.
+      </p>
+    </div>
   </div>
 </div>
 
