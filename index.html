@@ -72,14 +72,9 @@ nav a.active{color:var(--green-accent);}
 .section-label{font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--green-accent);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .section-label::before{content:'';display:block;width:32px;height:1px;background:var(--green-accent);}
 .section-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:900;letter-spacing:-0.02em;margin-bottom:40px;line-height:1.1;}
-.objective-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;  /* text wider, animation smaller */
-  gap: 40px;
-  align-items: center;
-}
+.objective-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;min-height:400px;}
 .objective-text{font-size:1rem;font-weight:300;line-height:1.9;color:var(--gray);padding-left:28px;border-left:2px solid var(--green-accent);}
-.objective-anim-box{position:relative;height:350px;width:100%;border:1px solid rgba(46,204,64,0.2);background:rgba(0,0,0,0.5);overflow:hidden;}
+.objective-anim-box{position:relative;height:380px;border:1px solid rgba(46,204,64,0.2);background:rgba(0,0,0,0.5);overflow:hidden;}
 #interaction-canvas{width:100%;height:100%;display: block;}
 .anim-label{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:0.68rem;letter-spacing:0.2em;color:var(--green-accent);text-transform:uppercase;opacity:0.7;}
 
