@@ -1026,12 +1026,12 @@
   </a>
 
   <nav>
-    <a href="#" class="active" data-section="home" onclick="showSection('home', this)" draggable="false">Home</a>
+    <a href="#" class="" data-section="home" onclick="showSection('home', this)" draggable="false">Home</a>
     <a href="#" data-section="news" onclick="showSection('news', this)" draggable="false">News</a>
     <a href="#" data-section="research" onclick="showSection('research', this)" draggable="false">Research</a>
     <a href="#" data-section="publications" onclick="showSection('publications', this)" draggable="false">Publications</a>
-    <a href="#" data-section="team" onclick="showSection('team', this)" draggable="false">Team</a>
-    <a href="#" data-section="contact" onclick="showSection('contact', this)" draggable="false">Contact</a>
+    <a href="#" data-section="team" onclick="showSection('team', this)" draggable="false" class="active">Team</a>
+    <a href="#" data-section="contact" onclick="showSection('contact', this)" draggable="false" class="">Contact</a>
     <a href="#" data-section="pictures" onclick="showSection('pictures', this)" draggable="false">Pictures</a>
   </nav>
   <!-- Social Media Icons -->
@@ -1052,7 +1052,7 @@
 </header>
 
 <!-- HOME SECTION -->
-<div id="home" class="section active">
+<div id="home" class="section">
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
@@ -1331,7 +1331,7 @@
 <div class="extra-content-wrap"><div class="extra-content-list" data-section="research"></div><div class="extra-content-toolbar"><button class="add-item-btn" onclick="addTextBlock('research')">+ Add Text</button><button class="add-item-btn" onclick="triggerAddPhoto('research')">+ Add Photo</button><button class="add-item-btn" onclick="addSubsection('research')">+ Add Subsection</button></div><button class="remove-section-btn">✕ Remove This Whole Section</button></div></div>
 
 <!-- TEAM SECTION -->
-<div id="team" class="section">
+<div id="team" class="section active">
   <div class="team-section">
     <div class="section-label" contenteditable="false">Our People</div>
     <h2 class="section-title" contenteditable="false">The Team</h2>
@@ -1462,7 +1462,7 @@
       <button class="add-item-btn" onclick="addTeamMember('team-group-phd')">+ Add Team Member</button>
     </div>
 
-    <button class="add-item-btn" style="margin-top:36px;" onclick="addTeamGroup()">+ Add Team Group (e.g. Master Students, Past Interns)</button>
+    <div class="team-group" id="team-group-1"><div class="phd-section-title" contenteditable="false">Master Students</div><div class="team-group-list"><div class="student-card"><div class="drag-handle" draggable="true" title="Drag to reorder">⠿</div><button class="remove-btn" title="Remove this item">×</button><div class="hex-frame-sm" id="hex-new-1"><svg viewBox="0 0 140 155" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"></polygon><polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"></polygon><polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"></polygon><circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"></circle></svg><div class="hex-img-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"></circle><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"></path></svg><span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span></div><button class="photo-upload-btn" title="Replace photo" onclick="document.getElementById('file-hex-new-1').click()">📷</button><input type="file" id="file-hex-new-1" accept="image/*" style="display:none" onchange="handlePhotoUpload(event,'hex-new-1')"></div><div class="student-details"><div class="student-name" contenteditable="false">Shubhranshu Behera&nbsp;</div><div class="student-nickname" contenteditable="false">Subbu</div><div class="student-degree" contenteditable="false">Int.MSc</div><div class="student-role-badge" contenteditable="false">Master Student</div><div class="student-bio-area"><span class="pi-bio-placeholder" contenteditable="false">[ A short bio or research focus will be added here ]</span></div></div></div><div class="student-card"><div class="drag-handle" draggable="true" title="Drag to reorder">⠿</div><button class="remove-btn" title="Remove this item">×</button><div class="hex-frame-sm" id="hex-new-2"><svg viewBox="0 0 140 155" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"></polygon><polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"></polygon><polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"></polygon><circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"></circle></svg><div class="hex-img-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"></circle><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"></path></svg><span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span></div><button class="photo-upload-btn" title="Replace photo" onclick="document.getElementById('file-hex-new-2').click()">📷</button><input type="file" id="file-hex-new-2" accept="image/*" style="display:none" onchange="handlePhotoUpload(event,'hex-new-2')"></div><div class="student-details"><div class="student-name" contenteditable="false">Pratush Kumar Pusti</div><div class="student-nickname" contenteditable="false">Tush</div><div class="student-degree" contenteditable="false"><span style="font-size: 12.48px;">Int.MSc</span></div><div class="student-role-badge" contenteditable="false"><span style="font-size: 9.92px; letter-spacing: 1.1904px;">Master Student</span></div><div class="student-bio-area"><span class="pi-bio-placeholder" contenteditable="false">[ A short bio or research focus will be added here ]</span></div></div></div></div><button class="add-item-btn" onclick="addTeamMember('team-group-1')">+ Add Team Member</button><button class="remove-section-btn" style="margin-left:12px;" onclick="removeTeamGroup('team-group-1')">✕ Remove This Group</button></div><div class="team-group" id="team-group-2"><div class="phd-section-title" contenteditable="false">Past Interns</div><div class="team-group-list"></div><button class="add-item-btn" onclick="addTeamMember('team-group-2')">+ Add Team Member</button><button class="remove-section-btn" style="margin-left:12px;" onclick="removeTeamGroup('team-group-2')">✕ Remove This Group</button></div><button class="add-item-btn" style="margin-top:36px;" onclick="addTeamGroup()">+ Add Team Group (e.g. Master Students, Past Interns)</button>
 
   </div>
 <div class="extra-content-wrap"><div class="extra-content-list" data-section="team"></div><div class="extra-content-toolbar"><button class="add-item-btn" onclick="addTextBlock('team')">+ Add Text</button><button class="add-item-btn" onclick="triggerAddPhoto('team')">+ Add Photo</button><button class="add-item-btn" onclick="addSubsection('team')">+ Add Subsection</button></div><button class="remove-section-btn">✕ Remove This Whole Section</button></div></div>
