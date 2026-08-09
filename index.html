@@ -1057,8 +1057,8 @@
   </a>
 
   <nav>
-    <a href="#" class="active" data-section="home" onclick="showSection('home', this)" draggable="false">Home</a>
-    <a href="#" data-section="news" onclick="showSection('news', this)" draggable="false">News</a>
+    <a href="#" class="" data-section="home" onclick="showSection('home', this)" draggable="false">Home</a>
+    <a href="#" data-section="news" onclick="showSection('news', this)" draggable="false" class="active">News</a>
     <a href="#" data-section="research" onclick="showSection('research', this)" class="" draggable="false">Research</a>
     <a href="#" data-section="publications" onclick="showSection('publications', this)" draggable="false">Publications</a>
     <a href="#" data-section="team" onclick="showSection('team', this)" draggable="false">Team</a>
@@ -1083,7 +1083,7 @@
 </header>
 
 <!-- HOME SECTION -->
-<div id="home" class="section active">
+<div id="home" class="section">
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
@@ -1109,7 +1109,7 @@
 
     <!-- ANIMATION 1: hero background particles — see "ANIMATION 1" in the JavaScript near the end of this file -->
     <div class="hero-animation">
-      <canvas id="phage-canvas" width="1053" height="875"></canvas>
+      <canvas id="phage-canvas" width="800" height="500"></canvas>
     </div>
     <!-- end ANIMATION 1 -->
   </section>
@@ -1269,20 +1269,20 @@
 <div class="extra-content-wrap"><div class="extra-content-list" data-section="home"><div class="block-item block-text"><div class="drag-handle" draggable="true" title="Drag to reorder">⠿</div><button class="remove-btn" title="Remove this item">×</button><div class="block-content" contenteditable="false">Click here and start typing...</div></div></div><div class="extra-content-toolbar"><button class="add-item-btn" onclick="addTextBlock('home')">+ Add Text</button><button class="add-item-btn" onclick="triggerAddPhoto('home')">+ Add Photo</button><button class="add-item-btn" onclick="addSubsection('home')">+ Add Subsection</button></div><button class="remove-section-btn">✕ Remove This Whole Section</button></div></div>
 
 <!-- NEWS SECTION -->
-<div id="news" class="section">
+<div id="news" class="section active">
   <div class="news-section">
     <div class="section-label" contenteditable="false">Lab Updates</div>
     <h2 class="section-title" contenteditable="false">News</h2>
 
-    <div class="news-list">
+    <div class="news-list"><div class="news-card"><div class="drag-handle" draggable="true" title="Drag to reorder">⠿</div><button class="remove-btn" title="Remove this item">×</button><div class="news-date" contenteditable="false"><span style="font-size: 11.52px; letter-spacing: 2.304px; background-color: rgba(10, 46, 10, 0.44);">June 2026</span></div><div class="news-body"><h3 class="news-title" contenteditable="false"><h3 class="news-title" contenteditable="false" style="color: rgb(244, 253, 244); background-color: rgba(10, 46, 10, 0.55);"><span style="color: rgb(232, 184, 75);">NISER Student Internship Programme</span></h3></h3><p class="news-desc" contenteditable="false">Describe the<span style="background-color: rgba(10, 46, 10, 0.3); color: rgb(244, 253, 244); font-size: medium;">We are pleased to announce that</span><span style="font-size: medium; color: rgb(46, 204, 64);"> </span><strong style="color: rgb(244, 253, 244); font-size: medium;"><span style="color: rgb(46, 204, 64);">three students</span> have been selected to undertake research internships in our laboratory as part of the <span style="color: rgb(46, 204, 64);">NISER Student Internship Programme</span></strong><span style="font-size: medium; color: rgb(46, 204, 64);">.<br></span><span style="background-color: rgba(10, 46, 10, 0.3); color: rgb(244, 253, 244); font-size: medium;">During their internship, the students will gain hands-on experience in</span><span style="background-color: rgba(10, 46, 10, 0.3); color: rgb(244, 253, 244); font-size: medium;"> </span><strong style="font-size: medium; color: rgb(46, 204, 64);">advanced molecular biology and cloning techniques</strong><span style="background-color: rgba(10, 46, 10, 0.3); color: rgb(244, 253, 244); font-size: medium;">, while being introduced to experimental approaches used in studying</span><span style="background-color: rgba(10, 46, 10, 0.3); color: rgb(244, 253, 244); font-size: medium;"> </span><span style="font-size: medium; color: rgb(46, 204, 64);"><strong>bacteriophage–bacteria interactions and microbial defense systems</strong>.</span>&nbsp;update here.</p></div></div>
 
       <!-- News item template — duplicate this block for each new update, or just use the "+ Add News Item" button below -->
       <div class="news-card"><div class="drag-handle" draggable="true" title="Drag to reorder">⠿</div>
         <button class="remove-btn" onclick="removeCard(this)" title="Remove this item">×</button>
-        <div class="news-date" contenteditable="false">2026</div>
+        <div class="news-date" contenteditable="false"><span style="font-size: 11.52px; letter-spacing: 2.304px; background-color: rgba(10, 46, 10, 0.55);">MAy 2026</span></div>
         <div class="news-body">
-          <h3 class="news-title" contenteditable="false">Welcome to the new Mahata Lab website</h3>
-          <p class="news-desc" contenteditable="false">This News section will keep you updated on lab announcements, publications, talks, awards, and new members. Check back soon for updates.</p>
+          <h3 class="news-title" contenteditable="false"><h3 class="news-title" contenteditable="false" style="color: rgb(244, 253, 244); background-color: rgba(10, 46, 10, 0.55);"><span style="color: rgb(232, 184, 75);">ANRF–PMECRG Research Grant</span></h3></h3>
+          <p class="news-desc" contenteditable="false"><p class="isSelectedEnd" style="color: rgb(244, 253, 244); font-size: medium; background-color: rgba(10, 46, 10, 0.55);"><span style="color: rgb(255, 255, 255);">We are proud to announce that </span><span style="color: rgb(46, 204, 64);"><strong>Dr. Tridib Mahata</strong> </span><span style="color: rgb(255, 255, 255);">has been awarded the </span><strong style="color: rgb(46, 204, 64);">ANRF–Prime Minister’s Early Career Research Grant (PMECRG)</strong><span style="color: rgb(255, 255, 255);"> to pursue research on</span><span style="color: rgb(46, 204, 64);"> <strong>bacteriophage-encoded antimicrobials</strong></span><span style="color: rgb(255, 255, 255);">.</span></p><p style="color: rgb(244, 253, 244); font-size: medium; background-color: rgba(10, 46, 10, 0.55);"><span style="color: rgb(255, 255, 255);">This funding will support our efforts to explore novel phage-encoded antimicrobial strategies and their implications for understanding microbial warfare.</span></p></p>
         </div>
       </div>
 
