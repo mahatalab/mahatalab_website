@@ -1058,9 +1058,9 @@
 
   <nav>
     <a href="#" class="" data-section="home" onclick="showSection('home', this)" draggable="false">Home</a>
-    <a href="#" data-section="news" onclick="showSection('news', this)" draggable="false" class="active">News</a>
+    <a href="#" data-section="news" onclick="showSection('news', this)" draggable="false" class="">News</a>
     <a href="#" data-section="research" onclick="showSection('research', this)" class="" draggable="false">Research</a>
-    <a href="#" data-section="publications" onclick="showSection('publications', this)" draggable="false">Publications</a>
+    <a href="#" data-section="publications" onclick="showSection('publications', this)" draggable="false" class="active">Publications</a>
     <a href="#" data-section="team" onclick="showSection('team', this)" draggable="false">Team</a>
     <a href="#" data-section="contact" onclick="showSection('contact', this)" class="" draggable="false">Contact</a>
     <a href="#" data-section="pictures" onclick="showSection('pictures', this)" draggable="false">Pictures</a>
@@ -1269,7 +1269,7 @@
 <div class="extra-content-wrap"><div class="extra-content-list" data-section="home"><div class="block-item block-text"><div class="drag-handle" draggable="true" title="Drag to reorder">⠿</div><button class="remove-btn" title="Remove this item">×</button><div class="block-content" contenteditable="false">Click here and start typing...</div></div></div><div class="extra-content-toolbar"><button class="add-item-btn" onclick="addTextBlock('home')">+ Add Text</button><button class="add-item-btn" onclick="triggerAddPhoto('home')">+ Add Photo</button><button class="add-item-btn" onclick="addSubsection('home')">+ Add Subsection</button></div><button class="remove-section-btn">✕ Remove This Whole Section</button></div></div>
 
 <!-- NEWS SECTION -->
-<div id="news" class="section active">
+<div id="news" class="section">
   <div class="news-section">
     <div class="section-label" contenteditable="false">Lab Updates</div>
     <h2 class="section-title" contenteditable="false">News</h2>
@@ -1593,7 +1593,7 @@
 <div class="extra-content-wrap"><div class="extra-content-list" data-section="pictures"></div><div class="extra-content-toolbar"><button class="add-item-btn" onclick="addTextBlock('pictures')">+ Add Text</button><button class="add-item-btn" onclick="triggerAddPhoto('pictures')">+ Add Photo</button><button class="add-item-btn" onclick="addSubsection('pictures')">+ Add Subsection</button></div><button class="remove-section-btn">✕ Remove This Whole Section</button></div></div>
 
 <!-- PUBLICATIONS SECTION -->
-<div id="publications" class="section">
+<div id="publications" class="section active">
   <div class="pub-section">
     <div class="section-label" style="margin-bottom:16px;" contenteditable="false">Research Output</div>
     <h2 class="section-title" contenteditable="false">Publications</h2>
@@ -1604,7 +1604,7 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Phage-encoded homing endonucleases attenuate bacterial immunity <span class="pub-preprint">Preprint</span></div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D.</div>
-        <div class="pub-journal" contenteditable="false">BioRxiv, 2025</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);">BioRxiv, 2025</span></div>
       </div>
     </div>
 
@@ -1614,7 +1614,7 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Gamma-Mobile-Trio systems are mobile elements rich in bacterial defensive and offensive tools</div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Kanarek K, Goren MG, Ragavan RM, Bosis E, Qimron U, Salomon D.</div>
-        <div class="pub-journal" contenteditable="false"><em>Nature Microbiology</em> 2024, 9, 3268–3283</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Nature Microbiology</em> 2024, 9, 3268–3283</span></div>
       </div>
     </div>
 
@@ -1624,23 +1624,23 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Engineering mice for female-biased progeny without impacting genetic integrity and litter size <span class="pub-preprint">Preprint</span></div>
         <div class="pub-authors" contenteditable="false">Yosef I, <strong>Mahata T</strong>, Chen Y, Bar-joseph H, Shalgi R, Munitz A, Gerlic M, Qimron U.</div>
-        <div class="pub-journal" contenteditable="false">BioRxiv, 2023</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);">BioRxiv, 2023</span></div>
       </div>
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">An efficient, scarless, selection-free technology for phage engineering</div>
         <div class="pub-authors" contenteditable="false">Goren MG, <strong>Mahata T</strong>, Qimron U.</div>
-        <div class="pub-journal" contenteditable="false"><em>RNA Biology</em> 2023, 20(1), 830–835</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>RNA Biology</em> 2023, 20(1), 830–835</span></div>
       </div>
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Inhibition of Host Cell Division by T5 protein 008 (Hdi)</div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Molshanski-Mor S, Goren MG, Kohen-Manor M, Yosef I, Avram O, Salomon D, Qimron U.</div>
-        <div class="pub-journal" contenteditable="false"><em>Microbiology Spectrum</em> 2023, 11(6), e01697-23</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Microbiology Spectrum</em> 2023, 11(6), e01697-23</span></div>
       </div>
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Highly active CRISPR adaptation proteins revealed by a robust enrichment technology</div>
         <div class="pub-authors" contenteditable="false">Yosef I,† <strong>Mahata T</strong>,† Goren MG, Degany OJ, Ben-Shem A, Qimron U.</div>
-        <div class="pub-journal" contenteditable="false"><em>Nucleic Acids Research</em> 2023, 51(14), 7552–7562</div>
-        <div class="pub-equal" contenteditable="false">† Equal contributions</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Nucleic Acids Research</em> 2023, 51(14), 7552–7562</span></div>
+        <div class="pub-equal" contenteditable="false"><span style="color: rgb(255, 255, 255);">† Equal contributions</span></div>
       </div>
     </div>
 
@@ -1650,12 +1650,12 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Thou shalt not cleave DNA — only repress transcription: A compact Cas protein representing a new CRISPR-Cas subtype</div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Qimron U.</div>
-        <div class="pub-journal" contenteditable="false"><em>Molecular Cell</em> 2022, 82(23), 4403–4404</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Molecular Cell</em> 2022, 82(23), 4403–4404</span></div>
       </div>
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Cleavage of Abasic Sites in DNA by an Aminoquinoxaline Compound. Augmented Cytotoxicity and DNA Damage in Combination with an Anticancer Drug Chlorambucil in Human Colorectal Carcinoma Cells</div>
         <div class="pub-authors" contenteditable="false">Mandi CS, <strong>Mahata T</strong>, Patra D, Chakraborty J, Bora A, Pal R, Dutta S.</div>
-        <div class="pub-journal" contenteditable="false"><em>ACS Omega</em> 2022, 7(8), 6488–6504</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>ACS Omega</em> 2022, 7(8), 6488–6504</span></div>
       </div>
     </div>
 
@@ -1665,13 +1665,13 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">A phage mechanism for selective nicking of dUMP-containing DNA</div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Molshanski-Mor S, Goren MG, Jana B, Kohen-Manor M, Yosef I, Avram O, Pupko T, Salomon D, Qimron U.</div>
-        <div class="pub-journal" contenteditable="false"><em>PNAS</em> 2021, 118(23), e2026354118</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>PNAS</em> 2021, 118(23), e2026354118</span></div>
       </div>
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Interaction of a Triantennary Quinoline Glycoconjugate with the Asialoglycoprotein Receptor</div>
         <div class="pub-authors" contenteditable="false">Palit S,† Banerjee S,† <strong>Mahata T</strong>,† Niyogi S, Das T, Mandi CS, Chakrabarty P, Dutta S.</div>
-        <div class="pub-journal" contenteditable="false"><em>ChemMedChem</em> 2021, 16(14), 2211–2216</div>
-        <div class="pub-equal" contenteditable="false">† Equal contributions</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>ChemMedChem</em> 2021, 16(14), 2211–2216</span></div>
+        <div class="pub-equal" contenteditable="false"><span style="color: rgb(255, 255, 255);">† Equal contributions</span></div>
       </div>
     </div>
 
@@ -1681,7 +1681,7 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Quinoxaline derivatives disrupt the base stacking of hepatitis C virus-internal ribosome entry site RNA: Reduce translation and replication</div>
         <div class="pub-authors" contenteditable="false">Chakraborty J, Kanungo A, <strong>Mahata T</strong>, Kumar K, Sharma G, Pal R, Ahammed SK, Patra D, Majhi B, Chakrabarti S, Das S, Dutta S.</div>
-        <div class="pub-journal" contenteditable="false"><em>Chem. Commun.</em> 2019, 55, 14027–14030</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Chem. Commun.</em> 2019, 55, 14027–14030</span></div>
       </div>
     </div>
 
@@ -1691,7 +1691,7 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Intercalator induced DNA superstructure formation: Doxorubicin and a synthetic quinoxaline derivative</div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Chakraborty J, Kanungo A, Patra D, Basu G, Dutta S.</div>
-        <div class="pub-journal" contenteditable="false"><em>Biochemistry</em> 2018, 57(38), 5557–5563</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Biochemistry</em> 2018, 57(38), 5557–5563</span></div>
       </div>
     </div>
 
@@ -1701,7 +1701,7 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">The Benzyl Moiety in a Quinoxaline-Based Scaffold Acts as a DNA Intercalation Switch</div>
         <div class="pub-authors" contenteditable="false"><strong>Mahata T</strong>, Kanungo A, Ganguly S, Modugula EK, Choudhury S, Pal SK, Basu G, Dutta S.</div>
-        <div class="pub-journal" contenteditable="false"><em>Angewandte Chemie</em> 2016, 55(27), 7733–7736</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>Angewandte Chemie</em> 2016, 55(27), 7733–7736</span></div>
       </div>
     </div>
 
@@ -1711,7 +1711,7 @@
       <div class="pub-card"><button class="remove-btn" title="Remove this item">×</button>
         <div class="pub-title" contenteditable="false">Synthesis of a visibly emissive 9-nitro-2,3-dihydro-1H-pyrimido[1,2-a]quinoxalin-5-amine scaffold with large Stokes shift and live cell imaging</div>
         <div class="pub-authors" contenteditable="false">Kanungo A, Patra D, Mukherjee S, <strong>Mahata T</strong>, Maulik PR, Dutta S.</div>
-        <div class="pub-journal" contenteditable="false"><em>RSC Advances</em> 2015, 5(87), 70958–70967</div>
+        <div class="pub-journal" contenteditable="false"><span style="color: rgb(255, 255, 255);"><em>RSC Advances</em> 2015, 5(87), 70958–70967</span></div>
       </div>
     </div>
 
