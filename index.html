@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahata Lab</title>
+<style>
+  /* Publications styles */
+  #publications { min-height: 100vh; padding-top: 72px; background: var(--black); }
+  .pub-section { padding: 80px 80px 100px; }
+  .pub-year-group { margin-bottom: 56px; position: relative; }
+  .pub-year { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.35em; color: var(--green-accent); text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .pub-year::after { content: ''; flex: 1; height: 1px; background: rgba(46,204,64,0.15); }
+  .pub-card { background: rgba(10,46,10,0.3); border: 1px solid rgba(46,204,64,0.08); border-left: 2px solid rgba(46,204,64,0.4); padding: 22px 28px; margin-bottom: 10px; transition: all 0.25s; }
+  .pub-card:hover { border-left-color: var(--green-accent); background: rgba(10,46,10,0.55); transform: translateX(4px); }
+  .pub-title { font-size: 0.92rem; font-weight: 600; color: var(--white); line-height: 1.5; margin-bottom: 6px; }
+  .pub-title em { color: var(--green-accent); font-style: normal; font-weight: 700; }
+  .pub-authors { font-size: 0.78rem; font-weight: 300; color: var(--gray); line-height: 1.6; margin-bottom: 4px; }
+  .pub-authors strong { color: var(--white); font-weight: 600; }
+  .pub-journal { font-size: 0.78rem; color: var(--gray-dark); font-style: italic; }
+  .pub-preprint { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(46,204,64,0.12); color: var(--green-accent); border: 1px solid rgba(46,204,64,0.25); padding: 2px 8px; margin-left: 8px; vertical-align: middle; }
+  .pub-equal { font-size: 0.7rem; color: var(--gray-dark); margin-top: 3px; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Montserrat+Alternates:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #0a2e0a;
+    --green-dark: #0f3d0f;
+    --green-mid: #1a5c1a;
+    --green-accent: #2ecc40;
+    --green-bright: #39ff14;
+    --green-glow: rgba(46,204,64,0.18);
+    --black: #050f05;
+    --white: #f4fdf4;
+    --gray: #b0c4b0;
+    --gray-dark: #3a4a3a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(5,15,5,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(46,204,64,0.15);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .logo-text .t-phage {
+    display: inline-block;
+    position: relative;
+  }
+
+  /* T7 phage SVG logo */
+  .t7-logo {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1px solid rgba(46,204,64,0.15);
+  }
+
+  .social-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-dark);
+    transition: all 0.25s;
+    text-decoration: none;
+    border-radius: 50%;
+  }
+
+  .social-icon svg { width: 15px; height: 15px; }
+  .social-icon:hover { color: var(--green-accent); background: rgba(46,204,64,0.08); }
+
+  nav a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 2px;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 18px; right: 18px;
+    height: 1px;
+    background: var(--green-accent);
+    transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+
+  nav a:hover { color: var(--white); }
+  nav a:hover::after { transform: scaleX(1); }
+  nav a.active { color: var(--green-accent); }
+  nav a.active::after { transform: scaleX(1); }
+
+  /* ===== SECTIONS ===== */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== HOME ===== */
+  #home {
+    min-height: 100vh;
+    padding-top: 72px;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 60% 50%, rgba(15,61,15,0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(46,204,64,0.08) 0%, transparent 60%),
+                var(--black);
+  }
+
+  /* Grid lines */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(46,204,64,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,204,64,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--green-accent);
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    color: var(--white);
+  }
+
+  .hero-title span {
+    color: var(--green-accent);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--gray);
+    max-width: 520px;
+  }
+
+  .hero-cta {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--green-accent);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover {
+    background: var(--green-bright);
+    box-shadow: 0 0 24px rgba(57,255,20,0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    border: 1px solid var(--gray-dark);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--green-accent);
+    color: var(--green-accent);
+  }
+
+  /* Animation canvas */
+  .hero-animation {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 55%;
+    z-index: 1;
+  }
+
+  #phage-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== OBJECTIVE SECTION ===== */
+  .objective-section {
+    padding: 100px 80px;
+    background: linear-gradient(180deg, var(--black) 0%, var(--green-deep) 50%, var(--black) 100%);
+    position: relative;
+  }
+
+  .objective-section::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green-accent), transparent);
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--green-accent);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    line-height: 1.1;
+  }
+
+  .objective-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 760px;
+  }
+
+  .objective-text {
+    font-size: 1.02rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--gray);
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid var(--green-accent);
+  }
+
+  /* ===== FOCUS SECTION ===== */
+  .focus-section {
+    padding: 100px 80px;
+    background: var(--black);
+  }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .focus-card {
+    background: var(--green-deep);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s;
+    cursor: pointer;
+    border: 1px solid rgba(46,204,64,0.08);
+  }
+
+  .focus-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(46,204,64,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .focus-card:hover { border-color: rgba(46,204,64,0.35); transform: translateY(-4px); }
+  .focus-card:hover::before { opacity: 1; }
+
+  .focus-number {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--green-accent);
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+
+  .focus-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 28px;
+  }
+
+  .focus-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 18px;
+    line-height: 1.3;
+  }
+
+  .focus-desc {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+
+  .focus-card-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--green-accent);
+    transform: scaleX(0);
+    transition: transform 0.35s;
+    transform-origin: left;
+  }
+
+  .focus-card:hover .focus-card-accent { transform: scaleX(1); }
+
+  /* ===== OTHER SECTIONS PLACEHOLDER ===== */
+  .placeholder-section {
+    min-height: 100vh;
+    padding-top: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--black);
+  }
+
+  .placeholder-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .placeholder-section p {
+    color: var(--gray);
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .placeholder-section .green-bar {
+    width: 60px;
+    height: 3px;
+    background: var(--green-accent);
+    margin-bottom: 10px;
+  }
+
+  /* ===== NEW FOOTER ===== */
+  .site-footer {
+    padding: 52px 80px;
+    background: var(--green-deep);
+    border-top: 1px solid rgba(46,204,64,0.15);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .footer-logos { display: flex; align-items: center; gap: 20px; }
+  .footer-logo-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .footer-lab-name { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-accent); }
+  .footer-logo-divider { width: 1px; height: 50px; background: rgba(46,204,64,0.2); }
+  .niser-logo-box { border: 1px dashed rgba(46,204,64,0.3); padding: 8px 14px; text-align: center; background: rgba(46,204,64,0.04); }
+  .niser-logo-text { display: block; font-size: 1rem; font-weight: 900; color: var(--green-accent); letter-spacing: 0.2em; }
+  .niser-logo-sub { display: block; font-size: 0.55rem; color: var(--gray-dark); letter-spacing: 0.1em; margin-top: 2px; }
+  .footer-center { text-align: center; }
+  .footer-quote { font-size: 0.88rem; font-weight: 300; font-style: italic; color: var(--gray); line-height: 1.7; }
+  .quote-mark { font-size: 1.2rem; color: var(--green-accent); font-style: normal; }
+  .footer-attr { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; color: var(--green-accent); text-transform: uppercase; margin-top: 8px; }
+  .footer-right { text-align: right; }
+  .footer-copy { font-size: 0.72rem; color: var(--gray-dark); letter-spacing: 0.05em; }
+
+  /* ===== TEAM SECTION ===== */
+  #team { min-height: 100vh; padding-top: 72px; background: var(--black); }
+  .team-section { padding: 80px 80px 100px; }
+  .team-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(46,204,64,0.25), transparent); margin: 70px 0; }
+
+  /* PI card */
+  .pi-block { display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: start; }
+  .hex-frame-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .hex-frame {
+    width: 200px; height: 220px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hex-frame svg { width: 100%; height: 100%; }
+  .hex-img-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hex-placeholder-text {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: rgba(46,204,64,0.5);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .pi-details { padding-top: 8px; }
+  .pi-name { font-size: 2rem; font-weight: 900; color: var(--white); letter-spacing: -0.01em; margin-bottom: 4px; }
+  .pi-title { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.18em; color: var(--green-accent); text-transform: uppercase; margin-bottom: 6px; }
+  .pi-role { font-size: 0.82rem; font-weight: 400; color: var(--gray); margin-bottom: 4px; }
+  .pi-email { font-size: 0.82rem; color: var(--green-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 28px; }
+  .pi-email:hover { text-decoration: underline; }
+  .pi-bio-area {
+    border-left: 2px solid rgba(46,204,64,0.25);
+    padding-left: 20px;
+    min-height: 120px;
+    color: var(--gray);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .pi-bio-placeholder { color: var(--gray-dark); font-style: italic; font-size: 0.8rem; }
+
+  /* PhD students section */
+  .team-group { margin-bottom: 50px; }
+  .phd-section-title { font-size: 1rem; font-weight: 700; letter-spacing: 0.25em; color: var(--green-accent); text-transform: uppercase; margin-bottom: 36px; display: flex; align-items: center; gap: 14px; }
+  .phd-section-title::after { content: ''; flex: 1; height: 1px; background: rgba(46,204,64,0.15); }
+
+  .student-card { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start; margin-bottom: 52px; padding-bottom: 52px; border-bottom: 1px solid rgba(46,204,64,0.07); }
+  .student-card:last-child { border-bottom: none; }
+
+  .hex-frame-sm { width: 140px; height: 155px; position: relative; flex-shrink: 0; }
+  .hex-frame-sm svg { width: 100%; height: 100%; }
+  .hex-frame-sm .hex-img-placeholder { inset: 0; }
+  .hex-photo-fill {
+    width: 100%; height: 100%; object-fit: cover;
+    clip-path: polygon(50% 7%, 90% 27%, 90% 68%, 50% 88%, 10% 68%, 10% 27%);
+  }
+
+  .student-details { padding-top: 4px; }
+  .student-name { font-size: 1.4rem; font-weight: 800; color: var(--white); letter-spacing: -0.01em; margin-bottom: 2px; }
+  .student-nickname { font-size: 0.75rem; color: var(--green-accent); font-weight: 600; letter-spacing: 0.1em; }
+  .student-degree { font-size: 0.78rem; font-weight: 400; color: var(--gray); margin-bottom: 4px; margin-top: 2px; }
+  .student-role-badge { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(46,204,64,0.1); color: var(--green-accent); border: 1px solid rgba(46,204,64,0.22); padding: 3px 10px; margin-bottom: 18px; }
+  .student-bio-area { min-height: 80px; color: var(--gray); font-size: 0.88rem; font-weight: 300; line-height: 1.8; border-left: 2px solid rgba(46,204,64,0.18); padding-left: 16px; }
+
+  /* ===== RESEARCH SECTION ===== */
+  #research { min-height: 100vh; padding-top: 72px; background: var(--black); }
+  .research-section { padding: 80px 80px 100px; }
+
+  /* ===== CUSTOM SECTIONS (added via "+ Add New Section") ===== */
+  .generic-section { min-height: 100vh; padding: 152px 80px 100px; }
+  .generic-content {
+    font-size: 0.95rem; font-weight: 300; line-height: 1.9; color: var(--gray);
+    margin: 32px 0 40px; max-width: 720px; min-height: 1.4em;
+  }
+  .generic-card-list { display: flex; flex-direction: column; gap: 14px; }
+  .generic-card {
+    position: relative;
+    background: rgba(10,46,10,0.3);
+    border: 1px solid rgba(46,204,64,0.08);
+    border-left: 2px solid rgba(46,204,64,0.4);
+    padding: 24px 28px;
+    transition: all 0.25s;
+  }
+  .generic-card:hover { border-left-color: var(--green-accent); background: rgba(10,46,10,0.55); }
+  .generic-card-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .generic-card-desc { font-size: 0.88rem; font-weight: 300; line-height: 1.7; color: var(--gray); }
+  .remove-section-btn {
+    display: none;
+    margin-top: 30px;
+    background: none;
+    border: 1px dashed rgba(220,50,50,0.5);
+    color: #e05050;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    cursor: pointer;
+  }
+  body.edit-mode-on .remove-section-btn { display: inline-block; }
+
+  @media (max-width: 768px) {
+    .generic-section { padding: 120px 24px 60px; }
+  }
+
+  /* ===== UNIVERSAL CONTENT BLOCKS (added via +Text / +Photo / +Subsection, work in every section) ===== */
+  .extra-content-wrap { padding: 30px 80px 70px; }
+  .extra-content-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+  .extra-content-toolbar { display: flex; flex-wrap: wrap; gap: 10px; }
+  .extra-content-toolbar .add-item-btn { margin-top: 0; }
+
+  .block-item { position: relative; }
+  .block-text .block-content, .block-subsection .block-content {
+    font-size: 0.9rem; font-weight: 300; line-height: 1.8; color: var(--gray);
+    background: rgba(10,46,10,0.2);
+    border: 1px solid rgba(46,204,64,0.08);
+    border-left: 2px solid rgba(46,204,64,0.3);
+    padding: 18px 22px;
+    min-height: 1.4em;
+  }
+  .block-subsection {
+    border: 1px solid rgba(46,204,64,0.15);
+    padding: 20px 22px 4px;
+    background: rgba(46,204,64,0.03);
+  }
+  .block-subsection .block-content { border: none; background: none; padding: 0 0 16px; }
+  .block-sub-title {
+    font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 12px;
+    min-height: 1.2em;
+  }
+  .block-photo .block-img { max-width: 100%; display: block; border-radius: 6px; }
+
+  @media (max-width: 768px) {
+    .extra-content-wrap { padding: 24px 24px 50px; }
+  }
+
+  /* ===== RESEARCH TABS ===== */
+  .research-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-bottom: 1px solid rgba(46,204,64,0.15);
+    margin-bottom: 48px;
+  }
+  .research-tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    padding: 14px 22px;
+    position: relative;
+    transition: color 0.25s;
+  }
+  .research-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 2px;
+    background: var(--green-accent);
+    transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+  .research-tab:hover { color: var(--white); }
+  .research-tab.active { color: var(--green-accent); }
+  .research-tab.active::after { transform: scaleX(1); }
+  .research-tab-content { display: none; }
+  .research-tab-content.active { display: block; }
+
+  /* ===== NEWS ===== */
+  .news-section { min-height: 100vh; padding: 152px 80px 100px; }
+  .news-list { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+  .news-card {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    background: rgba(10,46,10,0.3);
+    border: 1px solid rgba(46,204,64,0.08);
+    border-left: 2px solid rgba(46,204,64,0.4);
+    padding: 28px 32px;
+    transition: all 0.25s;
+  }
+  .news-card:hover { border-left-color: var(--green-accent); background: rgba(10,46,10,0.55); transform: translateX(4px); }
+  .news-date {
+    flex-shrink: 0;
+    width: 84px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    padding-top: 3px;
+  }
+  .news-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.4; }
+  .news-desc { font-size: 0.88rem; font-weight: 300; line-height: 1.75; color: var(--gray); }
+
+  @media (max-width: 768px) {
+    .news-section { padding: 120px 24px 60px; }
+    .news-card { flex-direction: column; gap: 8px; }
+  }
+  .research-coming { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; gap: 18px; text-align: center; }
+  .research-coming h3 { font-size: 1.4rem; font-weight: 700; color: var(--white); }
+  .research-coming p { color: var(--gray); font-size: 0.9rem; max-width: 480px; line-height: 1.7; }
+
+  /* ===== PICTURES SECTION ===== */
+  #pictures { min-height: 100vh; padding-top: 72px; background: var(--black); }
+  .pictures-section { padding: 80px 80px 100px; }
+  .pictures-coming { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; gap: 18px; text-align: center; }
+
+  /* ===== CONTACT SECTION ===== */
+  #contact { min-height: 100vh; padding-top: 72px; background: var(--black); }
+  .contact-section { padding: 80px 80px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-lab-name { font-size: 2.2rem; font-weight: 900; color: var(--white); letter-spacing: -0.02em; margin-bottom: 6px; }
+  .contact-tagline { font-size: 0.8rem; color: var(--green-accent); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 36px; }
+  .contact-detail-block { margin-bottom: 24px; }
+  .contact-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; color: var(--green-accent); text-transform: uppercase; margin-bottom: 6px; }
+  .contact-value { font-size: 0.92rem; font-weight: 300; color: var(--gray); line-height: 1.8; }
+  .contact-value a { color: var(--green-accent); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+  .contact-logo-area { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 20px; gap: 24px; }
+  .contact-logo-svg { opacity: 0.85; }
+  .contact-map-placeholder { width: 100%; height: 280px; border: 1px dashed rgba(46,204,64,0.2); background: rgba(10,46,10,0.15); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; margin-top: 30px; }
+  .contact-map-placeholder p { font-size: 0.75rem; color: var(--gray-dark); letter-spacing: 0.1em; }
+
+  @media (max-width: 900px) {
+    .site-footer { grid-template-columns: 1fr; text-align: center; padding: 40px 32px; }
+    .footer-logos { justify-content: center; }
+    .footer-right { text-align: center; }
+    .pi-block { grid-template-columns: 1fr; }
+    .hex-frame-wrap { align-items: flex-start; }
+    .student-card { grid-template-columns: 1fr; }
+    .contact-section { grid-template-columns: 1fr; }
+    .team-section, .research-section, .contact-section, .pub-section, .pictures-section { padding: 60px 32px; }
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+</style>
+<style>
+  /* ===== EASY-EDIT MODE (no-code editing toolbar) ===== */
+  .edit-toolbar {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 500;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .edit-toolbar.visible { display: flex; }
+  .edit-toolbar button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--black);
+    background: var(--green-accent);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    transition: all 0.2s;
+  }
+  .edit-toolbar button:hover { background: var(--green-bright); transform: translateY(-2px); }
+  .edit-toolbar #save-btn { background: var(--white); }
+  .edit-help-box {
+    max-width: 260px;
+    background: rgba(5,15,5,0.95);
+    border: 1px solid rgba(46,204,64,0.35);
+    color: var(--gray);
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+  .edit-help-box strong { color: var(--green-accent); }
+
+  .color-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(5,15,5,0.95);
+    border: 1px solid rgba(46,204,64,0.35);
+    padding: 10px 14px;
+    border-radius: 30px;
+  }
+  .color-toolbar button {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0;
+    box-shadow: none;
+  }
+  .color-toolbar button:hover { transform: scale(1.15); }
+  .color-toolbar .clear-color-btn {
+    width: auto; height: 24px; border-radius: 12px;
+    background: transparent; border: 1px solid rgba(255,255,255,0.3);
+    color: var(--gray); font-size: 0.65rem; padding: 0 10px;
+  }
+  .format-btn {
+    width: 26px; height: 26px; border-radius: 5px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.25);
+    color: var(--white); font-size: 0.8rem; font-family: 'Montserrat', sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 0;
+  }
+  .format-btn:hover { background: rgba(46,204,64,0.2); }
+
+  /* Camera / replace-photo button on hex frames, edit mode only */
+  .photo-upload-btn {
+    display: none;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--green-accent);
+    color: var(--black);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 6;
+  }
+  body.edit-mode-on .photo-upload-btn { display: flex; }
+  .resize-hex-btn {
+    display: none;
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(46,204,64,0.25);
+    color: var(--white);
+    border: 1px solid rgba(46,204,64,0.5);
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    z-index: 6;
+  }
+  body.edit-mode-on .resize-hex-btn { display: flex; }
+  .hex-frame, .hex-frame-sm { position: relative; }
+
+  /* GitHub login modal */
+  .gh-modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.7);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gh-modal {
+    background: #0a1a0a;
+    border: 1px solid rgba(46,204,64,0.3);
+    border-radius: 12px;
+    padding: 32px;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+  }
+  .gh-modal h3 { margin-bottom: 10px; color: var(--green-accent); }
+  .gh-modal p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+  .gh-modal label { display: block; font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; margin: 12px 0 6px; }
+  .gh-modal input[type="text"], .gh-modal input[type="password"] {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(46,204,64,0.25);
+    color: var(--white); padding: 10px 12px; border-radius: 6px; font-family: inherit; font-size: 0.85rem;
+  }
+  .gh-modal summary { cursor: pointer; font-size: 0.8rem; color: var(--gray); }
+  .gh-modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+  .gh-btn-primary, .gh-btn-secondary {
+    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.78rem;
+    padding: 10px 20px; border-radius: 6px; cursor: pointer; border: none;
+  }
+  .gh-btn-primary { background: var(--green-accent); color: var(--black); }
+  .gh-btn-secondary { background: transparent; color: var(--gray); border: 1px solid rgba(255,255,255,0.2); }
+
+  /* Highlight editable fields only while Edit Mode is on */
+  body.edit-mode-on [contenteditable="true"] {
+    outline: 1px dashed rgba(46,204,64,0.5);
+    outline-offset: 2px;
+    cursor: text;
+    border-radius: 2px;
+  }
+  body.edit-mode-on [contenteditable="true"]:hover,
+  body.edit-mode-on [contenteditable="true"]:focus {
+    outline: 1px solid var(--green-accent);
+    background: rgba(46,204,64,0.06);
+  }
+
+  /* Add / remove controls for repeatable items (News, Publications, Team) — hidden unless Edit Mode is on */
+  .news-card, .pub-card, .student-card { position: relative; }
+  .remove-btn {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(220,50,50,0.85);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+  }
+  .remove-btn:hover { background: #e03030; }
+  body.edit-mode-on .remove-btn { display: flex; }
+
+  /* Drag-to-reorder handles for News, Publications, Team, and What-We-Study cards */
+  .drag-handle {
+    display: none;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(46,204,64,0.15);
+    border: 1px solid rgba(46,204,64,0.4);
+    color: var(--green-accent);
+    border-radius: 6px;
+    cursor: grab;
+    font-size: 0.9rem;
+    z-index: 5;
+    user-select: none;
+  }
+  .drag-handle:active { cursor: grabbing; }
+  body.edit-mode-on .drag-handle { display: flex; }
+  body.edit-mode-on nav a { cursor: grab; }
+  .dragging { opacity: 0.35; }
+
+  .add-item-btn {
+    display: none;
+    margin-top: 20px;
+    background: none;
+    border: 1px dashed rgba(46,204,64,0.5);
+    color: var(--green-accent);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .add-item-btn:hover { background: rgba(46,204,64,0.08); }
+  body.edit-mode-on .add-item-btn { display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- ===== EASY-EDIT TOOLBAR ===== -->
+<div class="edit-toolbar" id="edit-toolbar">
+  <div id="edit-help" class="edit-help-box" style="display:none;">
+    <strong>Edit Mode is on.</strong><br>
+    Click any dashed text box to edit it. Select text and use the colors above to recolor it.<br>
+    Use the green <strong>+ Add</strong> buttons on News, Publications, and Team to add entries, and the red <strong>×</strong> on a card to remove it.<br>
+    Click the camera icon on a photo to replace it.<br>
+    When you're done, click <strong>Save &amp; Publish</strong> — your changes go live on the site in about a minute.<br>
+    <a href="#" onclick="forgetGhLogin(); return false;" style="color:var(--gray);font-size:0.7rem;">Not you? Forget this device's access key</a>
+  </div>
+  <div id="color-toolbar" class="color-toolbar" style="display:none;">
+    <button class="format-btn" style="font-weight:900;" onclick="applyFormat('bold')" title="Bold">B</button>
+    <button class="format-btn" style="font-style:italic;" onclick="applyFormat('italic')" title="Italic">I</button>
+    <button class="format-btn" style="text-decoration:underline;" onclick="applyFormat('underline')" title="Underline">U</button>
+    <span style="color:var(--gray);font-size:0.7rem;margin:0 2px 0 6px;">Color:</span>
+    <button style="background:#ffffff" onclick="applyColor('#ffffff')" title="White"></button>
+    <button style="background:#2ecc40" onclick="applyColor('#2ecc40')" title="Green"></button>
+    <button style="background:#a9b4a9" onclick="applyColor('#a9b4a9')" title="Gray"></button>
+    <button style="background:#e8b84b" onclick="applyColor('#e8b84b')" title="Gold"></button>
+    <button style="background:#e05050" onclick="applyColor('#e05050')" title="Red"></button>
+    <button style="background:#4a90e2" onclick="applyColor('#4a90e2')" title="Blue"></button>
+    <button style="background:#b366e0" onclick="applyColor('#b366e0')" title="Purple"></button>
+    <button style="background:#ff9d4d" onclick="applyColor('#ff9d4d')" title="Orange"></button>
+    <button class="clear-color-btn" onclick="applyColor('')" title="Reset color/formatting">Reset</button>
+  </div>
+  <button id="add-section-btn" onclick="addNewSection()" style="display:none;">+ Add New Section</button>
+  <button id="publish-btn" onclick="publishToGitHub()" style="display:none;">⬆ Save &amp; Publish</button>
+  <button id="backup-btn" onclick="downloadBackup()" style="display:none;">⬇ Download Backup</button>
+  <button id="edit-toggle-btn" onclick="toggleEditMode()">✎ Edit Page</button>
+</div>
+
+<!-- ===== GITHUB LOGIN MODAL ===== -->
+<div id="gh-login-modal" class="gh-modal-overlay" style="display:none;">
+  <div class="gh-modal">
+    <h3>Connect to GitHub to Edit</h3>
+    <p>Paste your GitHub access key below. This is only used by your own browser to save changes directly to your GitHub repository — it is never sent anywhere else.</p>
+    <label>Access key (Personal Access Token)</label>
+    <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+      <input type="checkbox" id="gh-remember" checked style="width:auto;"> Remember on this device
+    </label>
+
+    <details style="margin-top:14px;">
+      <summary>Repository details (auto-detected — only change if wrong)</summary>
+      <label>GitHub username / organization</label>
+      <input type="text" id="gh-owner-input">
+      <label>Repository name</label>
+      <input type="text" id="gh-repo-input">
+      <label>File path in repo</label>
+      <input type="text" id="gh-path-input">
+      <label>Branch</label>
+      <input type="text" id="gh-branch-input">
+    </details>
+
+    <div class="gh-modal-buttons">
+      <button class="gh-btn-secondary" onclick="closeGhModal()">Cancel</button>
+      <button class="gh-btn-primary" onclick="confirmGhLogin()">Connect</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#" onclick="showSection('home')">
+    <!-- T7 Phage logo SVG -->
+    <svg class="t7-logo" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Icosahedral head -->
+      <polygon points="19,2 31,9 31,23 19,30 7,23 7,9" fill="none" stroke="#2ecc40" stroke-width="1.5"/>
+      <polygon points="19,4 29,10 29,22 19,28 9,22 9,10" fill="rgba(46,204,64,0.08)" stroke="#2ecc40" stroke-width="0.5"/>
+      <!-- Neck/connector -->
+      <rect x="16.5" y="28" width="5" height="3" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+      <!-- Baseplate -->
+      <rect x="14" y="31" width="10" height="2.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+      <!-- Tail fibers - 3 each side -->
+      <line x1="14" y1="33" x2="8" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <line x1="16" y1="33" x2="12" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <line x1="24" y1="33" x2="30" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <line x1="22" y1="33" x2="26" y2="38" stroke="#2ecc40" stroke-width="1"/>
+      <!-- DNA inside head suggestion -->
+      <circle cx="19" cy="16" r="4" fill="none" stroke="rgba(46,204,64,0.3)" stroke-width="0.8" stroke-dasharray="2,2"/>
+    </svg>
+    <span class="logo-text">Mahata Lab</span>
+  </a>
+
+  <nav>
+    <a href="#" class="active" data-section="home" onclick="showSection('home', this)">Home</a>
+    <a href="#" data-section="news" onclick="showSection('news', this)">News</a>
+    <a href="#" data-section="research" onclick="showSection('research', this)">Research</a>
+    <a href="#" data-section="publications" onclick="showSection('publications', this)">Publications</a>
+    <a href="#" data-section="team" onclick="showSection('team', this)">Team</a>
+    <a href="#" data-section="contact" onclick="showSection('contact', this)">Contact</a>
+    <a href="#" data-section="pictures" onclick="showSection('pictures', this)">Pictures</a>
+  </nav>
+  <!-- Social Media Icons -->
+  <div class="social-links">
+    <a href="#" class="social-icon" title="Twitter / X" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.737-8.835L2.25 2.25h6.945l4.265 5.633 4.784-5.633Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" fill="currentColor"/></svg>
+    </a>
+    <a href="#" class="social-icon" title="LinkedIn" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor"/></svg>
+    </a>
+    <a href="#" class="social-icon" title="Google Scholar" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5 12 0z" fill="currentColor"/></svg>
+    </a>
+    <a href="mailto:tridibmahata@niser.ac.in" class="social-icon" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- HOME SECTION -->
+<div id="home" class="section active">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Microbiology · Genomics · Biochemistry</p>
+      <h1 class="hero-title">
+        The Molecular<br>
+        <span>Arms Race</span><br>
+        Never Ends
+      </h1>
+      <p class="hero-sub">
+        Decoding the ancient conflict between bacteria and bacteriophages — 
+        a battle billions of years in the making. We uncover the molecular weapons 
+        and defenses that shape microbial life, translating discoveries into tools for 
+        biotechnology and medicine.
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary" onclick="showSection('research', document.querySelector('nav a[data-section=research]'))">Read More</a>
+        <a href="#" class="btn-outline" onclick="showSection('contact', document.querySelector('nav a[data-section=contact]'))">Join the Lab</a>
+      </div>
+    </div>
+
+    <!-- ANIMATION 1: hero background particles — see "ANIMATION 1" in the JavaScript near the end of this file -->
+    <div class="hero-animation">
+      <canvas id="phage-canvas"></canvas>
+    </div>
+    <!-- end ANIMATION 1 -->
+  </section>
+
+  <!-- OBJECTIVE -->
+  <section class="objective-section">
+    <div class="section-label">Our Mission</div>
+    <h2 class="section-title">Lab Objective</h2>
+    <div class="objective-grid">
+      <div>
+        <p class="objective-text">
+          Our lab explores the fascinating molecular conflict between bacteria and bacteriophages — 
+          a never-ending evolutionary arms race that has been ongoing for billions of years. 
+          Our aim is to uncover fundamental mechanisms of microbial warfare: how phages take over 
+          their bacterial hosts and how bacteria defend themselves against phage attack.<br><br>
+          Using a combination of microbial genetics, molecular biology, genomics, and biochemistry, 
+          we investigate these interactions and translate our discoveries into innovative tools for 
+          biotechnology and medicine.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH FOCUS -->
+  <section class="focus-section">
+    <div class="section-label">Research Focus</div>
+    <h2 class="section-title">What We Study</h2>
+
+    <div class="focus-grid">
+
+      <!-- Focus 1 -->
+      <div class="focus-card" onclick="goToResearchTab('discovery')">
+        <div class="focus-number">01 — Discovery</div>
+        <!-- Icon: Genomic island / shield with DNA -->
+        <svg class="focus-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
+          <!-- Shield -->
+          <path d="M36 12 L52 20 L52 40 C52 52 36 60 36 60 C36 60 20 52 20 40 L20 20 Z" fill="rgba(46,204,64,0.12)" stroke="#2ecc40" stroke-width="1.5"/>
+          <!-- DNA helix inside -->
+          <path d="M30 28 Q36 32 30 36 Q36 40 30 44" stroke="#2ecc40" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M42 28 Q36 32 42 36 Q36 40 42 44" stroke="#2ecc40" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <line x1="30" y1="28" x2="42" y2="28" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
+          <line x1="30" y1="36" x2="42" y2="36" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
+          <line x1="30" y1="44" x2="42" y2="44" stroke="rgba(46,204,64,0.5)" stroke-width="1"/>
+        </svg>
+        <h3 class="focus-title">Discovery of Novel Bacterial Immune Systems</h3>
+        <p class="focus-desc">
+          We explore the GMT mobile genomic island — a hotspot of bacterial defense systems — along with 
+          other defense islands and environmental microbiomes, to discover new anti-phage systems. 
+          Understanding these systems may reveal evolutionary parallels to human immune pathways.
+        </p>
+        <div class="focus-card-accent"></div>
+      </div>
+
+      <!-- Focus 2 -->
+      <div class="focus-card" onclick="goToResearchTab('mechanisms')">
+        <div class="focus-number">02 — Mechanisms</div>
+        <!-- Icon: Phage breaking shield / counter defense -->
+        <svg class="focus-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
+          <!-- Phage body -->
+          <polygon points="36,10 46,17 46,30 36,37 26,30 26,17" fill="rgba(46,204,64,0.15)" stroke="#2ecc40" stroke-width="1.5"/>
+          <!-- Tail -->
+          <rect x="33.5" y="37" width="5" height="5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <rect x="31" y="42" width="10" height="2" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <!-- Tail fibers -->
+          <line x1="31" y1="44" x2="26" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="33" y1="44" x2="30" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="41" y1="44" x2="46" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="39" y1="44" x2="42" y2="50" stroke="#2ecc40" stroke-width="1"/>
+          <!-- Inhibitor lightning bolt -->
+          <path d="M50 14 L44 26 L49 26 L43 40" stroke="#39ff14" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 class="focus-title">Unravelling Phage Counter-Defense Strategies</h3>
+        <p class="focus-desc">
+          Phages have evolved remarkable strategies to overcome bacterial defenses, including direct 
+          inhibitors that neutralize immune systems. We study these counter-defense mechanisms to 
+          understand how phages disarm host immunity and harness these molecular tools for therapeutic applications.
+        </p>
+        <div class="focus-card-accent"></div>
+      </div>
+
+      <!-- Focus 3 -->
+      <div class="focus-card" onclick="goToResearchTab('therapeutics')">
+        <div class="focus-number">03 — Therapeutics</div>
+        <!-- Icon: Protein/antimicrobial targeting bacteria -->
+        <svg class="focus-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="30" fill="rgba(46,204,64,0.07)" stroke="rgba(46,204,64,0.3)" stroke-width="1"/>
+          <!-- Bacteria cell oval -->
+          <ellipse cx="36" cy="42" rx="18" ry="12" fill="rgba(46,204,64,0.1)" stroke="#2ecc40" stroke-width="1.5"/>
+          <!-- Flagella -->
+          <path d="M54 42 Q60 36 58 28" stroke="#2ecc40" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <path d="M18 42 Q12 38 14 28" stroke="#2ecc40" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <!-- Protein arrow targeting -->
+          <path d="M36 14 L36 28" stroke="#39ff14" stroke-width="2" stroke-linecap="round"/>
+          <polygon points="36,30 31,21 41,21" fill="#39ff14"/>
+          <!-- Target crosshair on bacteria -->
+          <circle cx="36" cy="42" r="5" stroke="rgba(57,255,20,0.6)" stroke-width="1" fill="none"/>
+          <line x1="36" y1="37" x2="36" y2="47" stroke="rgba(57,255,20,0.6)" stroke-width="1"/>
+          <line x1="31" y1="42" x2="41" y2="42" stroke="rgba(57,255,20,0.6)" stroke-width="1"/>
+        </svg>
+        <h3 class="focus-title">Exploring Phage-Encoded Antimicrobials</h3>
+        <p class="focus-desc">
+          Phages encode a vast repertoire of proteins targeting diverse bacterial metabolic processes. 
+          We identify phage-encoded proteins with antimicrobial activity, elucidate their mechanisms of 
+          action, and explore their potential to combat multidrug-resistant bacteria.
+        </p>
+        <div class="focus-card-accent"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-logos">
+      <!-- Lab Logo -->
+      <div class="footer-logo-item">
+        <svg width="44" height="44" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="19,2 31,9 31,23 19,30 7,23 7,9" fill="none" stroke="#2ecc40" stroke-width="1.5"/>
+          <polygon points="19,4 29,10 29,22 19,28 9,22 9,10" fill="rgba(46,204,64,0.08)" stroke="#2ecc40" stroke-width="0.5"/>
+          <rect x="16.5" y="28" width="5" height="3" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <rect x="14" y="31" width="10" height="2.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="14" y1="33" x2="8" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="16" y1="33" x2="12" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="24" y1="33" x2="30" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <line x1="22" y1="33" x2="26" y2="38" stroke="#2ecc40" stroke-width="1"/>
+          <circle cx="19" cy="16" r="4" fill="none" stroke="rgba(46,204,64,0.3)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        </svg>
+        <span class="footer-lab-name">Mahata Lab</span>
+      </div>
+      <!-- Divider -->
+      <div class="footer-logo-divider"></div>
+      <!-- NISER Logo placeholder -->
+      <div class="footer-logo-item niser-placeholder" title="NISER Logo – to be added">
+        <div class="niser-logo-box" id="niser-logo-frame" style="position:relative;">
+          <span class="niser-logo-text">NISER</span>
+          <span class="niser-logo-sub">Logo Coming Soon</span>
+          <button class="photo-upload-btn" style="bottom:-10px;right:-10px;" title="Upload logo" onclick="document.getElementById('file-niser-logo').click()">📷</button>
+          <input type="file" id="file-niser-logo" accept="image/*" style="display:none" onchange="handleLogoUpload(event,'niser-logo-frame')">
+        </div>
+      </div>
+      <button class="add-item-btn" onclick="addFooterLogoItem()">+ Add Logo</button>
+    </div>
+    <div class="footer-center">
+      <p class="footer-quote">
+        <span class="quote-mark">"</span>In the fields of observation, chance only favours the mind which is prepared…<span class="quote-mark">"</span>
+      </p>
+      <p class="footer-attr">— Louis Pasteur</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-copy">© 2025 Mahata Lab · NISER Bhubaneswar</p>
+      <p class="footer-copy" style="margin-top:4px;">School of Biological Sciences</p>
+      <button class="add-item-btn" style="margin-top:8px;" onclick="addFooterCreditLine()">+ Add Credit Line</button>
+    </div>
+  </footer>
+</div>
+
+<!-- NEWS SECTION -->
+<div id="news" class="section">
+  <div class="news-section">
+    <div class="section-label">Lab Updates</div>
+    <h2 class="section-title">News</h2>
+
+    <div class="news-list">
+
+      <!-- News item template — duplicate this block for each new update, or just use the "+ Add News Item" button below -->
+      <div class="news-card">
+        <button class="remove-btn" onclick="removeCard(this)" title="Remove this item">×</button>
+        <div class="news-date">2026</div>
+        <div class="news-body">
+          <h3 class="news-title">Welcome to the new Mahata Lab website</h3>
+          <p class="news-desc">This News section will keep you updated on lab announcements, publications, talks, awards, and new members. Check back soon for updates.</p>
+        </div>
+      </div>
+
+      <!-- Add more <div class="news-card"> blocks above this line as new news comes in -->
+
+    </div>
+    <button class="add-item-btn" onclick="addNewsItem()">+ Add News Item</button>
+  </div>
+</div>
+
+<!-- RESEARCH SECTION -->
+<div id="research" class="section">
+  <div class="research-section">
+    <div class="section-label">Ongoing Work</div>
+    <h2 class="section-title">Research</h2>
+
+    <!-- Tab buttons — mirror the "What We Study" cards on the Home page -->
+    <div class="research-tabs">
+      <button class="research-tab active" data-tab="discovery" onclick="switchResearchTab('discovery', this)">01 — Discovery</button>
+      <button class="research-tab" data-tab="mechanisms" onclick="switchResearchTab('mechanisms', this)">02 — Mechanisms</button>
+      <button class="research-tab" data-tab="therapeutics" onclick="switchResearchTab('therapeutics', this)">03 — Therapeutics</button>
+    </div>
+
+    <!-- Tab 1: Discovery -->
+    <div class="research-tab-content active" id="research-tab-discovery">
+      <div class="research-coming">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="28" stroke="rgba(46,204,64,0.2)" stroke-width="1.5"/>
+          <circle cx="30" cy="30" r="18" stroke="rgba(46,204,64,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="30" cy="30" r="6" fill="rgba(46,204,64,0.2)" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="30" y1="4" x2="30" y2="12" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="30" y1="48" x2="30" y2="56" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="4" y1="30" x2="12" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="48" y1="30" x2="56" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+        </svg>
+        <h3>Discovery of Novel Bacterial Immune Systems</h3>
+        <p>Detailed descriptions of our work on the GMT mobile genomic island, other defense islands, and environmental microbiomes will be added here shortly. In the meantime, explore our publications or contact us directly.</p>
+        <a href="#" class="btn-outline" onclick="showSection('publications', document.querySelector('nav a[data-section=publications]'))">View Publications</a>
+      </div>
+    </div>
+
+    <!-- Tab 2: Mechanisms -->
+    <div class="research-tab-content" id="research-tab-mechanisms">
+      <div class="research-coming">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="28" stroke="rgba(46,204,64,0.2)" stroke-width="1.5"/>
+          <circle cx="30" cy="30" r="18" stroke="rgba(46,204,64,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="30" cy="30" r="6" fill="rgba(46,204,64,0.2)" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="30" y1="4" x2="30" y2="12" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="30" y1="48" x2="30" y2="56" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="4" y1="30" x2="12" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="48" y1="30" x2="56" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+        </svg>
+        <h3>Unravelling Phage Counter-Defense Strategies</h3>
+        <p>Detailed descriptions of how phages neutralize bacterial immune systems will be added here shortly. In the meantime, explore our publications or contact us directly.</p>
+        <a href="#" class="btn-outline" onclick="showSection('publications', document.querySelector('nav a[data-section=publications]'))">View Publications</a>
+      </div>
+    </div>
+
+    <!-- Tab 3: Therapeutics -->
+    <div class="research-tab-content" id="research-tab-therapeutics">
+      <div class="research-coming">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="28" stroke="rgba(46,204,64,0.2)" stroke-width="1.5"/>
+          <circle cx="30" cy="30" r="18" stroke="rgba(46,204,64,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="30" cy="30" r="6" fill="rgba(46,204,64,0.2)" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="30" y1="4" x2="30" y2="12" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="30" y1="48" x2="30" y2="56" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="4" y1="30" x2="12" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+          <line x1="48" y1="30" x2="56" y2="30" stroke="rgba(46,204,64,0.4)" stroke-width="1.5"/>
+        </svg>
+        <h3>Exploring Phage-Encoded Antimicrobials</h3>
+        <p>Detailed descriptions of phage-encoded proteins with antimicrobial activity will be added here shortly. In the meantime, explore our publications or contact us directly.</p>
+        <a href="#" class="btn-outline" onclick="showSection('publications', document.querySelector('nav a[data-section=publications]'))">View Publications</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM SECTION -->
+<div id="team" class="section">
+  <div class="team-section">
+    <div class="section-label">Our People</div>
+    <h2 class="section-title">The Team</h2>
+
+    <!-- ===== PRINCIPAL INVESTIGATOR ===== -->
+    <div class="pi-block">
+      <div class="hex-frame-wrap">
+        <!-- Hexagonal / icosahedral photo frame -->
+        <div class="hex-frame" id="hex-pi">
+          <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer decorative hex -->
+            <polygon points="100,4 192,52 192,148 100,196 8,148 8,52" fill="none" stroke="rgba(46,204,64,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+            <!-- Main hex clip shape -->
+            <polygon points="100,14 182,60 182,150 100,196 18,150 18,60" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.5"/>
+            <!-- Inner hex accent -->
+            <polygon points="100,22 174,66 174,144 100,188 26,144 26,66" fill="none" stroke="rgba(46,204,64,0.12)" stroke-width="0.8"/>
+            <!-- Corner icosahedral facets -->
+            <line x1="100" y1="14" x2="100" y2="50" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="182" y1="60" x2="150" y2="78" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="182" y1="150" x2="150" y2="132" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="100" y1="196" x2="100" y2="160" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="18" y1="150" x2="50" y2="132" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <line x1="18" y1="60" x2="50" y2="78" stroke="rgba(46,204,64,0.18)" stroke-width="0.8"/>
+            <!-- Center circle hint -->
+            <circle cx="100" cy="105" r="38" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.15)" stroke-width="0.8"/>
+          </svg>
+          <div class="hex-img-placeholder">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="hex-placeholder-text">Photo<br>Coming Soon</span>
+          </div>
+          <button class="photo-upload-btn" title="Replace photo" onclick="document.getElementById('file-hex-pi').click()">📷</button>
+          <button class="resize-hex-btn" title="Resize photo" onclick="cycleHexSize('hex-pi')">⤢</button>
+          <input type="file" id="file-hex-pi" accept="image/*" style="display:none" onchange="handlePhotoUpload(event,'hex-pi')">
+        </div>
+      </div>
+
+      <div class="pi-details">
+        <div class="pi-title">Principal Investigator</div>
+        <h2 class="pi-name">Tridib Mahata, Ph.D.</h2>
+        <p class="pi-role">Assistant Professor</p>
+        <p class="pi-role">School of Biological Sciences, NISER Bhubaneswar</p>
+        <a class="pi-email" href="mailto:tridibmahata@niser.ac.in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+          tridibmahata@niser.ac.in
+        </a>
+        <div class="pi-bio-area">
+          <span class="pi-bio-placeholder">[ Biography and research interests of Prof. Mahata will be added here ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-divider"></div>
+
+    <!-- ===== TEAM GROUPS (PhD Students, and any groups you add) ===== -->
+    <div class="team-group" id="team-group-phd">
+      <div class="phd-section-title">PhD Students</div>
+      <div class="team-group-list">
+
+        <!-- Student 1: Samchita -->
+        <div class="student-card">
+          <div class="hex-frame-sm" id="hex-student-1">
+            <svg viewBox="0 0 140 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"/>
+              <polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"/>
+              <polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"/>
+              <line x1="70" y1="12" x2="70" y2="40" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="125" y1="44" x2="100" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="125" y1="104" x2="100" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="70" y1="136" x2="70" y2="108" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="15" y1="104" x2="40" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="15" y1="44" x2="40" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"/>
+            </svg>
+            <div class="hex-img-placeholder">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span>
+            </div>
+            <button class="photo-upload-btn" title="Replace photo" onclick="document.getElementById('file-hex-student-1').click()">📷</button>
+            <button class="resize-hex-btn" title="Resize photo" onclick="cycleHexSize('hex-student-1')">⤢</button>
+            <input type="file" id="file-hex-student-1" accept="image/*" style="display:none" onchange="handlePhotoUpload(event,'hex-student-1')">
+          </div>
+          <div class="student-details">
+            <div class="student-name">Samchita Sarangi</div>
+            <div class="student-nickname">( Sammy )</div>
+            <div class="student-degree">M.Sc.</div>
+            <div class="student-role-badge">PhD Student</div>
+            <div class="student-bio-area">
+              <span class="pi-bio-placeholder">[ A short bio or research focus for Samchita will be added here ]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student 2: Lalitmohan -->
+        <div class="student-card">
+          <div class="hex-frame-sm" id="hex-student-2">
+            <svg viewBox="0 0 140 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"/>
+              <polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"/>
+              <polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"/>
+              <line x1="70" y1="12" x2="70" y2="40" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="125" y1="44" x2="100" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="125" y1="104" x2="100" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="70" y1="136" x2="70" y2="108" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="15" y1="104" x2="40" y2="90" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <line x1="15" y1="44" x2="40" y2="58" stroke="rgba(46,204,64,0.15)" stroke-width="0.7"/>
+              <circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"/>
+            </svg>
+            <div class="hex-img-placeholder">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span>
+            </div>
+            <button class="photo-upload-btn" title="Replace photo" onclick="document.getElementById('file-hex-student-2').click()">📷</button>
+            <button class="resize-hex-btn" title="Resize photo" onclick="cycleHexSize('hex-student-2')">⤢</button>
+            <input type="file" id="file-hex-student-2" accept="image/*" style="display:none" onchange="handlePhotoUpload(event,'hex-student-2')">
+          </div>
+          <div class="student-details">
+            <div class="student-name">Lalitmohan Kar</div>
+            <div class="student-nickname">( Lalit )</div>
+            <div class="student-degree">M.Sc.</div>
+            <div class="student-role-badge">PhD Student</div>
+            <div class="student-bio-area">
+              <span class="pi-bio-placeholder">[ A short bio or research focus for Lalitmohan will be added here ]</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <button class="add-item-btn" onclick="addTeamMember('team-group-phd')">+ Add Team Member</button>
+    </div>
+
+    <button class="add-item-btn" style="margin-top:36px;" onclick="addTeamGroup()">+ Add Team Group (e.g. Master Students, Past Interns)</button>
+
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<div id="contact" class="section">
+  <div style="padding-top:72px;">
+    <div class="contact-section">
+      <!-- Left: Details -->
+      <div>
+        <div class="section-label" style="margin-bottom:12px;">Get In Touch</div>
+        <div class="contact-lab-name">Mahata Lab</div>
+        <div class="contact-tagline">Phage–Bacteria Interaction Lab</div>
+
+        <div class="contact-detail-block">
+          <div class="contact-label">Principal Investigator</div>
+          <div class="contact-value">Prof. Tridib Mahata</div>
+        </div>
+
+        <div class="contact-detail-block">
+          <div class="contact-label">Laboratory</div>
+          <div class="contact-value">Phage Bacteria Interaction Lab<br>School of Biological Sciences</div>
+        </div>
+
+        <div class="contact-detail-block">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">
+            Rooms 422 and 423<br>
+            National Institute of Science Education and Research<br>
+            Bhubaneswar, Jatni, Khordha<br>
+            Odisha, India — 752050
+          </div>
+        </div>
+
+        <div class="contact-detail-block">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:tridibmahata@niser.ac.in">tridibmahata@niser.ac.in</a></div>
+        </div>
+
+        <div class="contact-detail-block">
+          <div class="contact-label">Join the Lab</div>
+          <div class="contact-value" style="font-size:0.85rem;">We welcome motivated students and researchers interested in phage–bacteria interactions, microbial genetics, and molecular biology. Reach out via email with your CV and a brief statement of interest.</div>
+        </div>
+      </div>
+
+      <!-- Right: Logo + Map placeholder -->
+      <div class="contact-logo-area">
+        <!-- Lab logo large -->
+        <svg class="contact-logo-svg" width="100" height="110" viewBox="0 0 38 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="19,2 31,9 31,23 19,30 7,23 7,9" fill="none" stroke="#2ecc40" stroke-width="1.5"/>
+          <polygon points="19,4 29,10 29,22 19,28 9,22 9,10" fill="rgba(46,204,64,0.1)" stroke="#2ecc40" stroke-width="0.6"/>
+          <rect x="16.5" y="28" width="5" height="3.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <rect x="14" y="31.5" width="10" height="2.5" fill="none" stroke="#2ecc40" stroke-width="1.2"/>
+          <line x1="14" y1="34" x2="7" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+          <line x1="16" y1="34" x2="11" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+          <line x1="24" y1="34" x2="31" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+          <line x1="22" y1="34" x2="27" y2="42" stroke="#2ecc40" stroke-width="1.1"/>
+          <circle cx="19" cy="16" r="4" fill="none" stroke="rgba(46,204,64,0.35)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        </svg>
+        <div style="text-align:center;">
+          <div style="font-size:1.1rem;font-weight:900;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);">Mahata Lab</div>
+          <div style="font-size:0.68rem;color:var(--green-accent);font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-top:2px;">NISER Bhubaneswar</div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="contact-map-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="rgba(46,204,64,0.3)"/></svg>
+          <p>Map / Directions</p>
+          <p style="font-size:0.65rem; margin-top:4px; color:rgba(46,204,64,0.3);">NISER Bhubaneswar, Jatni, Odisha 752050</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PICTURES SECTION -->
+<div id="pictures" class="section">
+  <div style="padding-top:72px;">
+    <div class="pictures-section">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">Pictures</h2>
+      <div class="pictures-coming">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="rgba(46,204,64,0.3)" stroke-width="1.2"/>
+          <circle cx="8.5" cy="8.5" r="1.5" fill="rgba(46,204,64,0.4)"/>
+          <path d="M21 15l-5-5L5 21" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 style="font-size:1.4rem;font-weight:700;color:var(--white);">Gallery Coming Soon</h3>
+        <p style="color:var(--gray);font-size:0.9rem;max-width:420px;line-height:1.7;">Photos of the lab, team events, conferences, and experiments will be displayed here.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PUBLICATIONS SECTION -->
+<div id="publications" class="section">
+  <div class="pub-section">
+    <div class="section-label" style="margin-bottom:16px;">Research Output</div>
+    <h2 class="section-title">Publications</h2>
+
+    <!-- 2025 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2025</div>
+      <div class="pub-card">
+        <div class="pub-title">Phage-encoded homing endonucleases attenuate bacterial immunity <span class="pub-preprint">Preprint</span></div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D.</div>
+        <div class="pub-journal">BioRxiv, 2025</div>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2024</div>
+      <div class="pub-card">
+        <div class="pub-title">Gamma-Mobile-Trio systems are mobile elements rich in bacterial defensive and offensive tools</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Kanarek K, Goren MG, Ragavan RM, Bosis E, Qimron U, Salomon D.</div>
+        <div class="pub-journal"><em>Nature Microbiology</em> 2024, 9, 3268–3283</div>
+      </div>
+    </div>
+
+    <!-- 2023 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2023</div>
+      <div class="pub-card">
+        <div class="pub-title">Engineering mice for female-biased progeny without impacting genetic integrity and litter size <span class="pub-preprint">Preprint</span></div>
+        <div class="pub-authors">Yosef I, <strong>Mahata T</strong>, Chen Y, Bar-joseph H, Shalgi R, Munitz A, Gerlic M, Qimron U.</div>
+        <div class="pub-journal">BioRxiv, 2023</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">An efficient, scarless, selection-free technology for phage engineering</div>
+        <div class="pub-authors">Goren MG, <strong>Mahata T</strong>, Qimron U.</div>
+        <div class="pub-journal"><em>RNA Biology</em> 2023, 20(1), 830–835</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Inhibition of Host Cell Division by T5 protein 008 (Hdi)</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Molshanski-Mor S, Goren MG, Kohen-Manor M, Yosef I, Avram O, Salomon D, Qimron U.</div>
+        <div class="pub-journal"><em>Microbiology Spectrum</em> 2023, 11(6), e01697-23</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Highly active CRISPR adaptation proteins revealed by a robust enrichment technology</div>
+        <div class="pub-authors">Yosef I,† <strong>Mahata T</strong>,† Goren MG, Degany OJ, Ben-Shem A, Qimron U.</div>
+        <div class="pub-journal"><em>Nucleic Acids Research</em> 2023, 51(14), 7552–7562</div>
+        <div class="pub-equal">† Equal contributions</div>
+      </div>
+    </div>
+
+    <!-- 2022 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2022</div>
+      <div class="pub-card">
+        <div class="pub-title">Thou shalt not cleave DNA — only repress transcription: A compact Cas protein representing a new CRISPR-Cas subtype</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Qimron U.</div>
+        <div class="pub-journal"><em>Molecular Cell</em> 2022, 82(23), 4403–4404</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Cleavage of Abasic Sites in DNA by an Aminoquinoxaline Compound. Augmented Cytotoxicity and DNA Damage in Combination with an Anticancer Drug Chlorambucil in Human Colorectal Carcinoma Cells</div>
+        <div class="pub-authors">Mandi CS, <strong>Mahata T</strong>, Patra D, Chakraborty J, Bora A, Pal R, Dutta S.</div>
+        <div class="pub-journal"><em>ACS Omega</em> 2022, 7(8), 6488–6504</div>
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2021</div>
+      <div class="pub-card">
+        <div class="pub-title">A phage mechanism for selective nicking of dUMP-containing DNA</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Molshanski-Mor S, Goren MG, Jana B, Kohen-Manor M, Yosef I, Avram O, Pupko T, Salomon D, Qimron U.</div>
+        <div class="pub-journal"><em>PNAS</em> 2021, 118(23), e2026354118</div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-title">Interaction of a Triantennary Quinoline Glycoconjugate with the Asialoglycoprotein Receptor</div>
+        <div class="pub-authors">Palit S,† Banerjee S,† <strong>Mahata T</strong>,† Niyogi S, Das T, Mandi CS, Chakrabarty P, Dutta S.</div>
+        <div class="pub-journal"><em>ChemMedChem</em> 2021, 16(14), 2211–2216</div>
+        <div class="pub-equal">† Equal contributions</div>
+      </div>
+    </div>
+
+    <!-- 2019 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2019</div>
+      <div class="pub-card">
+        <div class="pub-title">Quinoxaline derivatives disrupt the base stacking of hepatitis C virus-internal ribosome entry site RNA: Reduce translation and replication</div>
+        <div class="pub-authors">Chakraborty J, Kanungo A, <strong>Mahata T</strong>, Kumar K, Sharma G, Pal R, Ahammed SK, Patra D, Majhi B, Chakrabarti S, Das S, Dutta S.</div>
+        <div class="pub-journal"><em>Chem. Commun.</em> 2019, 55, 14027–14030</div>
+      </div>
+    </div>
+
+    <!-- 2018 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2018</div>
+      <div class="pub-card">
+        <div class="pub-title">Intercalator induced DNA superstructure formation: Doxorubicin and a synthetic quinoxaline derivative</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Chakraborty J, Kanungo A, Patra D, Basu G, Dutta S.</div>
+        <div class="pub-journal"><em>Biochemistry</em> 2018, 57(38), 5557–5563</div>
+      </div>
+    </div>
+
+    <!-- 2016 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2016</div>
+      <div class="pub-card">
+        <div class="pub-title">The Benzyl Moiety in a Quinoxaline-Based Scaffold Acts as a DNA Intercalation Switch</div>
+        <div class="pub-authors"><strong>Mahata T</strong>, Kanungo A, Ganguly S, Modugula EK, Choudhury S, Pal SK, Basu G, Dutta S.</div>
+        <div class="pub-journal"><em>Angewandte Chemie</em> 2016, 55(27), 7733–7736</div>
+      </div>
+    </div>
+
+    <!-- 2015 -->
+    <div class="pub-year-group">
+      <div class="pub-year">2015</div>
+      <div class="pub-card">
+        <div class="pub-title">Synthesis of a visibly emissive 9-nitro-2,3-dihydro-1H-pyrimido[1,2-a]quinoxalin-5-amine scaffold with large Stokes shift and live cell imaging</div>
+        <div class="pub-authors">Kanungo A, Patra D, Mukherjee S, <strong>Mahata T</strong>, Maulik PR, Dutta S.</div>
+        <div class="pub-journal"><em>RSC Advances</em> 2015, 5(87), 70958–70967</div>
+      </div>
+    </div>
+
+  </div>
+  <div style="padding: 0 80px;">
+    <button class="add-item-btn" onclick="addPublication()">+ Add Publication</button>
+  </div>
+  <footer>
+    <div class="f-logo">Mahata Lab</div>
+    <p>Decoding the molecular arms race · Phage–Bacteria Interactions</p>
+  </footer>
+</div>
+
+<!-- Publications footer -->
+
+
+<script>
+// ===== NAVIGATION =====
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  if (el && el.classList) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== RESEARCH TABS =====
+// Switches which tab/panel is shown inside the Research section.
+// Called both by the tab buttons themselves and by the "What We Study"
+// cards on the Home page, so clicking a card jumps straight to the
+// matching tab in Research.
+function switchResearchTab(tab, el) {
+  document.querySelectorAll('.research-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.research-tab-content').forEach(c => c.classList.remove('active'));
+
+  const btn = el && el.classList ? el : document.querySelector('.research-tab[data-tab="' + tab + '"]');
+  if (btn) btn.classList.add('active');
+
+  const content = document.getElementById('research-tab-' + tab);
+  if (content) content.classList.add('active');
+
+  window.scrollTo(0, 0);
+}
+
+// Navigates from a "What We Study" card to the matching Research tab —
+// but only when we're NOT in edit mode, so clicking text to edit it
+// doesn't accidentally jump pages.
+function goToResearchTab(tab) {
+  if (editModeOn) return;
+  showSection('research', document.querySelector('nav a[data-section=research]'));
+  switchResearchTab(tab);
+}
+
+/* =========================================================
+   EASY-EDIT MODE — lets a non-coder update the site directly
+   in the browser, then download an updated HTML file to
+   replace the old one on their hosting. No code editing needed.
+   ========================================================= */
+
+let editModeOn = false;
+let teamMemberCounter = 0;
+
+// Every text field a layman should be able to edit directly.
+const EDITABLE_SELECTORS = [
+  '.hero-eyebrow', '.hero-title', '.hero-sub',
+  '.objective-text',
+  '.section-label', '.section-title',
+  '.focus-number', '.focus-title', '.focus-desc',
+  '.research-coming h3', '.research-coming p',
+  '.news-date', '.news-title', '.news-desc',
+  '.pi-title', '.pi-name', '.pi-role', '.pi-bio-placeholder', '.pi-email',
+  '.student-name', '.student-nickname', '.student-degree', '.student-role-badge',
+  '.phd-section-title',
+  '.contact-lab-name', '.contact-tagline', '.contact-label', '.contact-value',
+  '.pub-year', '.pub-title', '.pub-authors', '.pub-journal', '.pub-equal',
+  '.footer-quote', '.footer-attr', '.footer-copy',
+  '.footer-lab-name', '.niser-logo-text', '.niser-logo-sub',
+  '.generic-content', '.generic-card-title', '.generic-card-desc',
+  '.block-content', '.block-sub-title'
+];
+
+/* ---------- Entering / leaving Edit Mode ---------- */
+
+function toggleEditMode() {
+  if (!editModeOn) {
+    // Trying to turn edit mode ON — must have a GitHub key first.
+    if (!getGhToken()) {
+      openGhModal();
+      return;
+    }
+  }
+
+  editModeOn = !editModeOn;
+  document.body.classList.toggle('edit-mode-on', editModeOn);
+
+  document.querySelectorAll(EDITABLE_SELECTORS.join(',')).forEach(el => {
+    el.contentEditable = editModeOn;
+  });
+
+  document.querySelectorAll('nav a').forEach(a => { a.draggable = editModeOn; });
+
+  document.getElementById('edit-toggle-btn').textContent = editModeOn ? '✕ Exit Edit Mode' : '✎ Edit Page';
+  document.getElementById('publish-btn').style.display = editModeOn ? 'inline-block' : 'none';
+  document.getElementById('add-section-btn').style.display = editModeOn ? 'inline-block' : 'none';
+  document.getElementById('backup-btn').style.display = editModeOn ? 'inline-block' : 'none';
+  document.getElementById('color-toolbar').style.display = editModeOn ? 'flex' : 'none';
+  document.getElementById('edit-help').style.display = editModeOn ? 'block' : 'none';
+}
+
+/* ---------- Text color tool ---------- */
+
+function applyColor(color) {
+  document.execCommand('styleWithCSS', false, true);
+  if (color) {
+    document.execCommand('foreColor', false, color);
+  } else {
+    document.execCommand('removeFormat', false, null);
+  }
+}
+
+function applyFormat(command) {
+  document.execCommand('styleWithCSS', false, true);
+  document.execCommand(command, false, null);
+}
+
+/* ---------- Add / remove repeatable cards ---------- */
+
+function ensureRemoveButtons() {
+  document.querySelectorAll('.news-card, .pub-card, .student-card, .generic-card, .block-item').forEach(card => {
+    if (!card.querySelector(':scope > .remove-btn')) {
+      const btn = document.createElement('button');
+      btn.className = 'remove-btn';
+      btn.title = 'Remove this item';
+      btn.textContent = '×';
+      btn.onclick = function () { removeCard(btn); };
+      card.insertBefore(btn, card.firstChild);
+    }
+  });
+}
+
+/* ---------- Add a brand-new page section ---------- */
+
+function removeCard(btn) {
+  const card = btn.closest('.news-card, .pub-card, .student-card, .generic-card, .block-item');
+  if (card && confirm('Remove this item? This cannot be undone (unless you skip saving).')) {
+    card.remove();
+  }
+}
+
+function slugify(text) {
+  let base = text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+  let id = base, n = 1;
+  while (document.getElementById(id)) { id = base + '-' + (++n); }
+  return id;
+}
+
+function addNewSection() {
+  const title = window.prompt('Name your new section (e.g. "Grants", "Collaborators"):');
+  if (!title || !title.trim()) return;
+
+  const id = slugify(title);
+
+  // 1. Add a nav link — appears at the end; drag it into position afterward.
+  const navLink = document.createElement('a');
+  navLink.href = '#';
+  navLink.setAttribute('data-section', id);
+  navLink.setAttribute('onclick', "showSection('" + id + "', this)");
+  navLink.textContent = title;
+  navLink.draggable = editModeOn;
+  document.querySelector('nav').appendChild(navLink);
+
+  // 2. Build the section itself: just a title and a free-text paragraph.
+  //    Use the "+ Add Text / + Add Photo / + Add Subsection" toolbar (added
+  //    automatically below) for everything else.
+  const section = document.createElement('div');
+  section.id = id;
+  section.className = 'section';
+  section.setAttribute('data-custom-section', '1');
+  section.innerHTML =
+    '<div class="generic-section">' +
+      '<div class="section-label" contenteditable="true">Custom Section</div>' +
+      '<h2 class="section-title" contenteditable="true">' + title.replace(/</g, '&lt;') + '</h2>' +
+      '<div class="generic-content" contenteditable="true">Click here and start typing...</div>' +
+    '</div>';
+
+  // Insert it right before the footer, alongside the other page sections.
+  const footer = document.querySelector('footer');
+  footer.parentNode.insertBefore(section, footer);
+
+  ensureExtraContentAreas();
+  ensureRemoveSectionButtons();
+  ensureDragHandles();
+  showSection(id, navLink);
+}
+
+function removeSection(id) {
+  if (!confirm('Remove this entire section, including its menu link? This cannot be undone (unless you skip saving).')) return;
+  const navLink = document.querySelector('nav a[data-section="' + id + '"]');
+  const section = document.getElementById(id);
+  if (navLink) navLink.remove();
+  if (section) section.remove();
+  showSection('home', document.querySelector('nav a[data-section="home"]'));
+}
+
+/* ---------- Universal content blocks: work inside EVERY section ---------- */
+
+function buildExtraContentWrap(key) {
+  const wrap = document.createElement('div');
+  wrap.className = 'extra-content-wrap';
+  wrap.innerHTML =
+    '<div class="extra-content-list" data-section="' + key + '"></div>' +
+    '<div class="extra-content-toolbar">' +
+      '<button class="add-item-btn" onclick="addTextBlock(\'' + key + '\')">+ Add Text</button>' +
+      '<button class="add-item-btn" onclick="triggerAddPhoto(\'' + key + '\')">+ Add Photo</button>' +
+      '<button class="add-item-btn" onclick="addSubsection(\'' + key + '\')">+ Add Subsection</button>' +
+    '</div>';
+  return wrap;
+}
+
+// Adds the "+ Add Text / + Add Photo / + Add Subsection" toolbar to the
+// bottom of every section (Home, News, Research, Team... and any custom
+// section you create), so you're never stuck with only the built-in layout.
+//
+// Research is a special case: it has 3 tabs (Discovery/Mechanisms/Therapeutics).
+// Each tab gets its OWN toolbar and its own content, so something you add while
+// on "Discovery" doesn't show up on "Mechanisms" too. Research also gets one
+// more shared toolbar below the tabs, for anything that applies to all of them.
+function ensureExtraContentAreas() {
+  document.querySelectorAll('.research-tab-content').forEach(tabPanel => {
+    if (tabPanel.querySelector(':scope > .extra-content-wrap')) return;
+    tabPanel.appendChild(buildExtraContentWrap(tabPanel.id));
+  });
+
+  document.querySelectorAll('.section').forEach(sec => {
+    if (sec.querySelector(':scope > .extra-content-wrap')) return;
+    sec.appendChild(buildExtraContentWrap(sec.id));
+  });
+}
+
+// Adds a "Remove This Whole Section" button to every top-level section —
+// including the original built-in ones, in case you want to drop one entirely.
+// (Not added per Research-tab, since a tab isn't a whole section on its own.)
+function ensureRemoveSectionButtons() {
+  document.querySelectorAll('.section').forEach(sec => {
+    const wrap = sec.querySelector(':scope > .extra-content-wrap');
+    if (!wrap || wrap.querySelector('.remove-section-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'remove-section-btn';
+    btn.textContent = '✕ Remove This Whole Section';
+    btn.onclick = function () { removeSection(sec.id); };
+    wrap.appendChild(btn);
+  });
+}
+
+function addTextBlock(sectionId) {
+  const list = document.querySelector('.extra-content-list[data-section="' + sectionId + '"]');
+  if (!list) return;
+  const block = document.createElement('div');
+  block.className = 'block-item block-text';
+  block.innerHTML = '<div class="block-content" contenteditable="true">Click here and start typing...</div>';
+  list.appendChild(block);
+  ensureRemoveButtons();
+  ensureDragHandles();
+}
+
+function addSubsection(sectionId) {
+  const list = document.querySelector('.extra-content-list[data-section="' + sectionId + '"]');
+  if (!list) return;
+  const block = document.createElement('div');
+  block.className = 'block-item block-subsection';
+  block.innerHTML =
+    '<h3 class="block-sub-title" contenteditable="true">New Subsection Title</h3>' +
+    '<div class="block-content" contenteditable="true">Write this subsection\'s content here...</div>';
+  list.appendChild(block);
+  ensureRemoveButtons();
+  ensureDragHandles();
+}
+
+// Opens a file picker and drops the chosen photo straight into the section
+// as its own block — separate from the Team-photo hexagons, this is for
+// general photos anywhere on the page.
+function triggerAddPhoto(sectionId) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.onchange = function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+      const list = document.querySelector('.extra-content-list[data-section="' + sectionId + '"]');
+      if (!list) return;
+      const block = document.createElement('div');
+      block.className = 'block-item block-photo';
+      block.innerHTML = '<img class="block-img" src="' + ev.target.result + '">';
+      list.appendChild(block);
+      ensureRemoveButtons();
+      ensureDragHandles();
+    };
+    reader.readAsDataURL(file);
+  };
+  document.body.appendChild(input);
+  input.click();
+  setTimeout(function () { input.remove(); }, 10000);
+}
+
+/* ---------- Drag-to-reorder ---------- */
+
+const DRAG_ITEM_SELECTOR = '.focus-card, .news-card, .pub-year-group, .student-card, .generic-card, .block-item';
+let draggedEl = null;
+
+// Adds a small ⠿ drag handle to every reorderable card that doesn't have one yet.
+function ensureDragHandles() {
+  document.querySelectorAll(DRAG_ITEM_SELECTOR).forEach(card => {
+    if (!card.querySelector(':scope > .drag-handle')) {
+      const handle = document.createElement('div');
+      handle.className = 'drag-handle';
+      handle.draggable = true;
+      handle.title = 'Drag to reorder';
+      handle.textContent = '⠿';
+      card.insertBefore(handle, card.firstChild);
+    }
+  });
+}
+
+document.addEventListener('dragstart', function (e) {
+  const handle = e.target.closest('.drag-handle');
+  if (handle) {
+    draggedEl = handle.closest(DRAG_ITEM_SELECTOR);
+    if (draggedEl) draggedEl.classList.add('dragging');
+    return;
+  }
+  const navLink = e.target.closest('nav a');
+  if (navLink && editModeOn) {
+    draggedEl = navLink;
+  }
+});
+
+document.addEventListener('dragend', function () {
+  if (draggedEl) draggedEl.classList.remove('dragging');
+  draggedEl = null;
+});
+
+document.addEventListener('dragover', function (e) {
+  if (!draggedEl) return;
+  const target = e.target.closest(DRAG_ITEM_SELECTOR + ', nav a');
+  if (target && target !== draggedEl && target.parentNode === draggedEl.parentNode) {
+    e.preventDefault();
+  }
+});
+
+document.addEventListener('drop', function (e) {
+  if (!draggedEl) return;
+  const target = e.target.closest(DRAG_ITEM_SELECTOR + ', nav a');
+  if (target && target !== draggedEl && target.parentNode === draggedEl.parentNode) {
+    e.preventDefault();
+    const parent = draggedEl.parentNode;
+    const siblings = Array.from(parent.children);
+    const draggedIdx = siblings.indexOf(draggedEl);
+    const targetIdx = siblings.indexOf(target);
+    if (draggedIdx < targetIdx) {
+      parent.insertBefore(draggedEl, target.nextSibling);
+    } else {
+      parent.insertBefore(draggedEl, target);
+    }
+  }
+});
+
+function addNewsItem() {
+  const list = document.querySelector('.news-list');
+  const card = document.createElement('div');
+  card.className = 'news-card';
+  card.innerHTML =
+    '<div class="news-date" contenteditable="true">' + new Date().getFullYear() + '</div>' +
+    '<div class="news-body">' +
+      '<h3 class="news-title" contenteditable="true">New update title</h3>' +
+      '<p class="news-desc" contenteditable="true">Describe the update here.</p>' +
+    '</div>';
+  list.prepend(card);
+  ensureRemoveButtons();
+  ensureDragHandles();
+}
+
+function addPublication() {
+  const firstGroup = document.querySelector('.pub-year-group');
+  const group = document.createElement('div');
+  group.className = 'pub-year-group';
+  group.innerHTML =
+    '<div class="pub-year" contenteditable="true">' + new Date().getFullYear() + '</div>' +
+    '<div class="pub-card">' +
+      '<div class="pub-title" contenteditable="true">New publication title</div>' +
+      '<div class="pub-authors" contenteditable="true">Author names</div>' +
+      '<div class="pub-journal" contenteditable="true">Journal, Year</div>' +
+    '</div>';
+  firstGroup.parentNode.insertBefore(group, firstGroup);
+  ensureRemoveButtons();
+  ensureDragHandles();
+}
+
+function addTeamMember(groupId) {
+  teamMemberCounter++;
+  const hexId = 'hex-new-' + teamMemberCounter;
+  const container = document.querySelector('#' + groupId + ' .team-group-list');
+  if (!container) return;
+  const card = document.createElement('div');
+  card.className = 'student-card';
+  card.innerHTML =
+    '<div class="hex-frame-sm" id="' + hexId + '">' +
+      '<svg viewBox="0 0 140 155" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+        '<polygon points="70,4 133,38 133,108 70,142 7,108 7,38" fill="none" stroke="rgba(46,204,64,0.18)" stroke-width="1" stroke-dasharray="3,3"/>' +
+        '<polygon points="70,12 125,44 125,104 70,136 15,104 15,44" fill="rgba(10,46,10,0.6)" stroke="#2ecc40" stroke-width="1.4"/>' +
+        '<polygon points="70,20 117,50 117,98 70,128 23,98 23,50" fill="none" stroke="rgba(46,204,64,0.1)" stroke-width="0.7"/>' +
+        '<circle cx="70" cy="74" r="24" fill="rgba(46,204,64,0.04)" stroke="rgba(46,204,64,0.12)" stroke-width="0.7"/>' +
+      '</svg>' +
+      '<div class="hex-img-placeholder">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(46,204,64,0.4)" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(46,204,64,0.4)" stroke-width="1.2" stroke-linecap="round"/></svg>' +
+        '<span class="hex-placeholder-text" style="font-size:0.52rem;">Photo<br>Soon</span>' +
+      '</div>' +
+      '<button class="photo-upload-btn" title="Replace photo" onclick="document.getElementById(\'file-' + hexId + '\').click()">📷</button>' +
+      '<button class="resize-hex-btn" title="Resize photo" onclick="cycleHexSize(\'' + hexId + '\')">⤢</button>' +
+      '<input type="file" id="file-' + hexId + '" accept="image/*" style="display:none" onchange="handlePhotoUpload(event,\'' + hexId + '\')">' +
+    '</div>' +
+    '<div class="student-details">' +
+      '<div class="student-name" contenteditable="true">New Member Name</div>' +
+      '<div class="student-nickname" contenteditable="true">( Nickname )</div>' +
+      '<div class="student-degree" contenteditable="true">Degree</div>' +
+      '<div class="student-role-badge" contenteditable="true">Role</div>' +
+      '<div class="student-bio-area"><span class="pi-bio-placeholder" contenteditable="true">[ A short bio or research focus will be added here ]</span></div>' +
+    '</div>';
+  container.appendChild(card);
+  ensureRemoveButtons();
+  ensureDragHandles();
+}
+
+// Adds a whole new named group under Team — e.g. "Master Students", "Past Interns" —
+// each with its own title, its own member list, and its own "+ Add Member" button.
+let teamGroupCounter = 0;
+function addTeamGroup() {
+  const name = window.prompt('Name this team group (e.g. "Master Students", "Past Interns"):');
+  if (!name || !name.trim()) return;
+  teamGroupCounter++;
+  const groupId = 'team-group-' + teamGroupCounter;
+
+  const group = document.createElement('div');
+  group.className = 'team-group';
+  group.id = groupId;
+  group.innerHTML =
+    '<div class="phd-section-title" contenteditable="true">' + name.replace(/</g, '&lt;') + '</div>' +
+    '<div class="team-group-list"></div>' +
+    '<button class="add-item-btn" onclick="addTeamMember(\'' + groupId + '\')">+ Add Team Member</button>' +
+    '<button class="remove-section-btn" style="margin-left:12px;" onclick="removeTeamGroup(\'' + groupId + '\')">✕ Remove This Group</button>';
+
+  // Insert right before the "+ Add Team Group" button itself, so new groups stack in order.
+  const addGroupBtn = document.querySelector('.team-section > .add-item-btn[onclick="addTeamGroup()"]');
+  if (addGroupBtn) {
+    addGroupBtn.parentNode.insertBefore(group, addGroupBtn);
+  } else {
+    document.querySelector('.team-section').appendChild(group);
+  }
+
+  ensureRemoveButtons();
+  ensureDragHandles();
+}
+
+function removeTeamGroup(groupId) {
+  if (!confirm('Remove this entire group and everyone in it? This cannot be undone (unless you skip saving).')) return;
+  const group = document.getElementById(groupId);
+  if (group) group.remove();
+}
+
+/* ---------- Photo upload (embedded directly as image data, no separate file needed) ---------- */
+
+function handlePhotoUpload(event, hexId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const hexEl = document.getElementById(hexId);
+    const placeholder = hexEl.querySelector('.hex-img-placeholder');
+    placeholder.innerHTML = '<img class="hex-photo-fill" src="' + e.target.result + '">';
+  };
+  reader.readAsDataURL(file);
+}
+
+// Cycles a hexagon photo frame through Small / Medium / Large on each click.
+function cycleHexSize(hexId) {
+  const el = document.getElementById(hexId);
+  if (!el) return;
+  const isSmall = el.classList.contains('hex-frame-sm');
+  const baseW = isSmall ? 140 : 200;
+  const baseH = isSmall ? 155 : 220;
+  const sizes = [0.75, 1, 1.35];
+  let idx = parseInt(el.dataset.sizeIdx || '1', 10);
+  idx = (idx + 1) % sizes.length;
+  el.dataset.sizeIdx = idx;
+  const factor = sizes[idx];
+  el.style.width = (baseW * factor) + 'px';
+  el.style.height = (baseH * factor) + 'px';
+}
+
+// For plain rectangular logos in the footer (not hexagon-clipped like team photos).
+function handleLogoUpload(event, frameId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const frame = document.getElementById(frameId);
+    const uploadBtn = frame.querySelector('.photo-upload-btn');
+    const fileInput = frame.querySelector('input[type="file"]');
+    frame.querySelectorAll('span').forEach(s => s.remove());
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.style.cssText = 'max-height:44px;max-width:120px;display:block;';
+    frame.insertBefore(img, uploadBtn);
+  };
+  reader.readAsDataURL(file);
+}
+
+let footerLogoCounter = 0;
+function addFooterLogoItem() {
+  footerLogoCounter++;
+  const frameId = 'footer-logo-frame-' + footerLogoCounter;
+  const item = document.createElement('div');
+  item.className = 'footer-logo-item block-item';
+  item.innerHTML =
+    '<div class="niser-logo-box" id="' + frameId + '" style="position:relative;">' +
+      '<span class="niser-logo-text" contenteditable="true">LOGO</span>' +
+      '<span class="niser-logo-sub" contenteditable="true">Click camera to upload</span>' +
+      '<button class="photo-upload-btn" style="bottom:-10px;right:-10px;" title="Upload logo" onclick="document.getElementById(\'file-' + frameId + '\').click()">📷</button>' +
+      '<input type="file" id="file-' + frameId + '" accept="image/*" style="display:none" onchange="handleLogoUpload(event,\'' + frameId + '\')">' +
+    '</div>';
+  const addBtn = document.querySelector('.footer-logos .add-item-btn');
+  addBtn.parentNode.insertBefore(item, addBtn);
+  ensureRemoveButtons();
+}
+
+function addFooterCreditLine() {
+  const btn = document.querySelector('.footer-right .add-item-btn');
+  if (!btn) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'block-item';
+  wrapper.style.cssText = 'display:inline-block; position:relative;';
+  wrapper.innerHTML = '<p class="footer-copy" contenteditable="true" style="margin-top:4px;">New credit line — click to edit</p>';
+  btn.parentNode.insertBefore(wrapper, btn);
+  ensureRemoveButtons();
+}
+
+/* ---------- GitHub connection (login + repo settings) ---------- */
+
+function detectRepoDefaults() {
+  const host = window.location.hostname; // e.g. someone.github.io
+  const parts = host.split('.');
+  const owner = parts[0] || '';
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  let repo, path;
+  if (pathParts.length === 0) {
+    // Site served from the root — repo is usually "<owner>.github.io"
+    repo = owner + '.github.io';
+    path = 'index.html';
+  } else {
+    repo = pathParts[0];
+    path = pathParts.slice(1).join('/') || 'index.html';
+  }
+  return { owner, repo, path, branch: 'main' };
+}
+
+function getGhToken() {
+  return localStorage.getItem('gh_token') || sessionStorage.getItem('gh_token') || '';
+}
+
+function getGhConfig() {
+  const saved = localStorage.getItem('gh_config');
+  return saved ? JSON.parse(saved) : detectRepoDefaults();
+}
+
+function openGhModal() {
+  const cfg = getGhConfig();
+  document.getElementById('gh-owner-input').value = cfg.owner;
+  document.getElementById('gh-repo-input').value = cfg.repo;
+  document.getElementById('gh-path-input').value = cfg.path;
+  document.getElementById('gh-branch-input').value = cfg.branch;
+  document.getElementById('gh-token-input').value = '';
+  document.getElementById('gh-login-modal').style.display = 'flex';
+}
+
+function closeGhModal() {
+  document.getElementById('gh-login-modal').style.display = 'none';
+}
+
+function confirmGhLogin() {
+  const token = document.getElementById('gh-token-input').value.trim();
+  if (!token) { alert('Please paste your GitHub access key.'); return; }
+
+  const config = {
+    owner: document.getElementById('gh-owner-input').value.trim(),
+    repo: document.getElementById('gh-repo-input').value.trim(),
+    path: document.getElementById('gh-path-input').value.trim(),
+    branch: document.getElementById('gh-branch-input').value.trim() || 'main'
+  };
+  localStorage.setItem('gh_config', JSON.stringify(config));
+
+  const remember = document.getElementById('gh-remember').checked;
+  if (remember) {
+    localStorage.setItem('gh_token', token);
+  } else {
+    sessionStorage.setItem('gh_token', token);
+  }
+
+  closeGhModal();
+  toggleEditMode();
+}
+
+function forgetGhLogin() {
+  localStorage.removeItem('gh_token');
+  sessionStorage.removeItem('gh_token');
+  alert('Access key forgotten on this device.');
+}
+
+/* ---------- Publishing straight to the GitHub repo ---------- */
+
+// Safely base64-encodes text that may contain non-ASCII characters (é, –, ×, etc.)
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  return btoa(binary);
+}
+
+async function publishToGitHub() {
+  const token = getGhToken();
+  const config = getGhConfig();
+  if (!token) { openGhModal(); return; }
+
+  const publishBtn = document.getElementById('publish-btn');
+  const originalText = publishBtn.textContent;
+  publishBtn.textContent = 'Publishing…';
+  publishBtn.disabled = true;
+
+  try {
+    const wasEditing = editModeOn;
+    if (wasEditing) toggleEditMode(); // strip highlighting/contenteditable before capturing HTML
+
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const apiUrl = 'https://api.github.com/repos/' + config.owner + '/' + config.repo + '/contents/' + config.path;
+
+    // 1. Get current file SHA (required by GitHub to update a file)
+    const getResp = await fetch(apiUrl + '?ref=' + config.branch, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
+    });
+    if (!getResp.ok) throw new Error('Could not read current file from GitHub (status ' + getResp.status + '). Check the repository details.');
+    const getData = await getResp.json();
+
+    // 2. Push the updated content
+    const putResp = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'Update site content — ' + new Date().toLocaleString(),
+        content: utf8ToBase64(html),
+        sha: getData.sha,
+        branch: config.branch
+      })
+    });
+
+    if (!putResp.ok) {
+      const errData = await putResp.json().catch(() => ({}));
+      throw new Error(errData.message || ('GitHub rejected the update (status ' + putResp.status + ').'));
+    }
+
+    alert('Published! Your changes are on their way live — GitHub Pages usually updates within a minute.');
+    if (wasEditing) toggleEditMode();
+
+  } catch (err) {
+    alert('Could not publish: ' + err.message + '\n\nYour edits are still on this page — try Download Backup so nothing is lost, then try Save & Publish again.');
+  } finally {
+    publishBtn.textContent = originalText;
+    publishBtn.disabled = false;
+  }
+}
+
+// Safety-net: always available as a local download, in case publishing fails.
+function downloadBackup() {
+  const wasEditing = editModeOn;
+  if (wasEditing) toggleEditMode();
+
+  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'mahata-lab-backup.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  if (wasEditing) toggleEditMode();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  ensureRemoveButtons();
+  ensureDragHandles();
+  ensureExtraContentAreas();
+  ensureRemoveSectionButtons();
+
+  // The Edit toolbar stays completely hidden from ordinary visitors.
+  // It only appears if you open the site with ?edit=1 in the address bar,
+  // or if this browser already has a saved access key from a previous visit.
+  const urlWantsEdit = new URLSearchParams(window.location.search).get('edit') === '1';
+  if (urlWantsEdit || getGhToken()) {
+    document.getElementById('edit-toolbar').classList.add('visible');
+  }
+});
+
+
+/* =========================================================
+   ANIMATION 1 — HERO BACKGROUND
+   Floating phage/bacteria dots behind the "Mahata Lab" title.
+   Canvas element: <canvas id="phage-canvas"> in the hero section near the top of <body>.
+   To remove this animation entirely: delete this whole (function(){...})() block below,
+   and delete the <div class="hero-animation"><canvas id="phage-canvas"></canvas></div> block in the HTML.
+   ========================================================= */
+(function() {
+  try {
+    const canvas = document.getElementById('phage-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0, particles = [], bacteria = [], running = true;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth || 800;
+      H = canvas.height = canvas.offsetHeight || 500;
+    }
+
+    function drawPhage(x, y, size, angle, alpha) {
+      // A literal bacteriophage silhouette: hexagonal head, tail sheath,
+      // baseplate, and tail fibers — like a tiny "lunar lander."
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = '#2ecc40';
+      ctx.fillStyle = 'rgba(46,204,64,0.1)';
+      ctx.lineWidth = 1;
+
+      // Head (hexagon)
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const a = (Math.PI / 3) * i - Math.PI / 6;
+        const px = Math.cos(a) * size, py = Math.sin(a) * size;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Tail sheath
+      ctx.beginPath();
+      ctx.rect(-size * 0.22, size * 0.85, size * 0.44, size * 0.6);
+      ctx.stroke();
+
+      // Baseplate
+      ctx.beginPath();
+      ctx.rect(-size * 0.4, size * 1.45, size * 0.8, size * 0.18);
+      ctx.stroke();
+
+      // Tail fibers (splayed legs)
+      ctx.strokeStyle = 'rgba(46,204,64,0.5)';
+      ctx.lineWidth = 0.8;
+      [[-0.4, 1.63, -0.85, 2.15], [0.4, 1.63, 0.85, 2.15]].forEach(([x1, y1, x2, y2]) => {
+        ctx.beginPath();
+        ctx.moveTo(x1 * size, y1 * size);
+        ctx.lineTo(x2 * size, y2 * size);
+        ctx.stroke();
+      });
+
+      ctx.restore();
+    }
+
+    function drawBacterium(x, y, w, h, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = 'rgba(10,40,10,0.5)';
+      ctx.strokeStyle = 'rgba(46,204,64,0.35)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(x, y, w, h, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function init() {
+      resize();
+      particles = [];
+      for (let i = 0; i < 12; i++) {
+        particles.push({
+          x: Math.random() * W, y: Math.random() * H,
+          size: 8 + Math.random() * 10,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          angle: Math.random() * Math.PI * 2,
+          va: (Math.random() - 0.5) * 0.004,
+          alpha: 0.25 + Math.random() * 0.4
+        });
+      }
+      bacteria = [];
+      for (let i = 0; i < 4; i++) {
+        bacteria.push({
+          x: Math.random() * W, y: Math.random() * H,
+          w: 28 + Math.random() * 18, h: 12 + Math.random() * 6,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          alpha: 0.3 + Math.random() * 0.25
+        });
+      }
+    }
+
+    function animate() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+
+      bacteria.forEach(b => {
+        b.x += b.vx; b.y += b.vy;
+        if (b.x < -40) b.x = W + 40; if (b.x > W + 40) b.x = -40;
+        if (b.y < -40) b.y = H + 40; if (b.y > H + 40) b.y = -40;
+        drawBacterium(b.x, b.y, b.w, b.h, b.alpha);
+      });
+
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.angle += p.va;
+        if (p.x < -30) p.x = W + 30; if (p.x > W + 30) p.x = -30;
+        if (p.y < -30) p.y = H + 30; if (p.y > H + 30) p.y = -30;
+        drawPhage(p.x, p.y, p.size, p.angle, p.alpha);
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('load', function () {
+      init();
+      // Safety net: some browsers report a 0-size canvas right at load,
+      // so re-measure shortly after in case sizes were not ready yet.
+      setTimeout(init, 300);
+      animate();
+    });
+  } catch (err) {
+    console.warn('Hero animation failed to start:', err);
+  }
+})();
+
+</script>
+</body>
+</html>
