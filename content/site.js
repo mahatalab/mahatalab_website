@@ -2,7 +2,7 @@ window.SITE_DATA = {
  "settings": {
   "name": "Mahata Lab",
   "subtitle": "Bacteria and Phage Genetics Lab | NISER Bhubaneswar",
-  "logo": "",
+  "logo": "assets/uploads/1790963274426-0.jpg",
   "favicon": "",
   "colors": {
    "plum": "#3B245C",
