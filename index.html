@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahata Lab — Website Editor</title><meta name="robots" content="noindex">
+<style>
+:root{--plum:#3B245C;--purple:#5B3A82;--violet:#7656A6;--pale:#F3F0F8;--text:#242129}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;color:var(--text);background:#FAFAFC}
+header{background:var(--plum);color:#fff;padding:.7rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+header h1{font:600 1.1rem Georgia,serif;margin:0 auto 0 0}
+button{background:var(--purple);color:#fff;border:0;border-radius:4px;padding:.45rem .9rem;cursor:pointer;font:inherit}button:hover{background:var(--violet)}
+button.g{background:#fff;color:var(--purple);border:1px solid var(--violet)}button.d{background:#fff;color:#a12;border:1px solid #c88}
+#pub{background:#2f7d4f}#pub:hover{background:#256a41}
+#conn{background:#2A193F;color:#ddd;padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-size:13px}
+#conn input{padding:.3rem;border:1px solid #666;border-radius:3px;width:130px}#conn input[type=password]{width:210px}
+#st{padding:.4rem 1rem;background:#fff8dc;display:none}#st.on{display:block}
+main{display:grid;grid-template-columns:200px 1fr;min-height:70vh}
+aside{background:var(--pale);padding:1rem;border-right:1px solid #ddd}aside button{display:block;width:100%;text-align:left;background:none;color:var(--plum);margin-bottom:2px}
+aside button.on{background:var(--plum);color:#fff}
+#form{padding:1.2rem;max-width:860px}
+fieldset{border:1px solid #d8d0e8;border-radius:6px;margin:.8rem 0;padding:.6rem .9rem}legend{font-weight:600;color:var(--plum);padding:0 .4rem}
+.f{margin:.6rem 0}.f>label{display:block;font-weight:600;font-size:13px;color:var(--purple)}
+.f input:not([type=file]):not([type=color]),.f textarea,.f select{width:100%;padding:.4rem;border:1px solid #bbb;border-radius:4px;font:inherit}
+.f textarea{min-height:80px}
+details{border:1px solid #d8d0e8;border-radius:6px;margin:.5rem 0;background:#fff}details>summary{padding:.5rem .8rem;cursor:pointer;font-weight:600;display:flex;gap:.3rem;align-items:center}
+details>summary span{margin-right:auto}details>summary button{padding:.1rem .5rem}details>div{padding:0 .9rem .6rem}
+.tb{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;background:var(--pale);padding:.3rem;border:1px solid #bbb;border-bottom:0;border-radius:4px 4px 0 0}
+.tb button{padding:.1rem .6rem}.tb label{font-size:12px;display:flex;gap:.2rem;align-items:center}
+.ed{min-height:100px;border:1px solid #bbb;border-radius:0 0 4px 4px;padding:.5rem;background:#fff}
+.tb select{width:auto!important}.th{max-height:110px;display:block;margin:.3rem 0;border:1px solid #ddd}
+#pv{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:9;padding:2vh 3vw}#pv.on{display:flex;flex-direction:column;gap:.4rem}
+#pv iframe{flex:1;background:#fff;border:0;border-radius:6px}
+@media(max-width:700px){main{grid-template-columns:1fr}aside{display:flex;flex-wrap:wrap;gap:2px}aside button{width:auto}}
+</style></head><body>
+<header><h1>Mahata Lab — Website Editor</h1>
+<button class="g" id="save">Save draft</button><button class="g" id="prev">Preview</button><button id="pub">Publish to GitHub</button><a href="../" style="color:#fff">← Back to site</a></header>
+<div id="conn">GitHub repo: <input id="own" placeholder="owner / user"> / <input id="rep" placeholder="repository"> branch <input id="brn" value="main" style="width:70px">
+Token: <input id="tok" type="password" placeholder="paste token (kept in memory only)" autocomplete="off"><button id="chk">Connect</button></div>
+<div id="st" role="status"></div>
+<main><aside id="nav" aria-label="Sections"></aside><section id="form"></section></main>
+<div id="pv"><button id="pvx">Close preview</button><iframe id="fr" title="Preview"></iframe></div>
+<script src="../content/site.js"></script>
+<script src="editor.js"></script></body></html>
