@@ -1,7 +1,7 @@
 window.SITE_DATA = {
  "settings": {
   "name": "Mahata Lab",
-  "subtitle": "Bacteria and Phage Genetics Lab | NISER Bhubaneswar",
+  "subtitle": "Bacteria and Phage Genetics Lab",
   "logo": "assets/uploads/1790963274426-0.jpg",
   "favicon": "",
   "colors": {
@@ -25,7 +25,7 @@ window.SITE_DATA = {
  },
  "home": {
   "order": [
-   "hero",
+   "about",
    "about"
   ],
   "eyebrow": "Microbial Genetics · Molecular Biology · Biochemistry",
