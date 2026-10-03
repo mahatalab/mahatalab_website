@@ -108,7 +108,7 @@ section.block{padding:72px 0}main{min-height:60vh}
 .logos{display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin-top:32px}.logos img{height:110px;width:auto;border:0;border-radius:0}
 
 /* Footer */
-.site-footer{background:var(--footer);color:#E6DEF3;padding:52px 0 18px;margin-top:0}
+.site-footer{background:var(--footer);color:#E6DEF3;padding:45px 0 18px;margin-top:0}
 .quote{text-align:center;font-style:italic;font-size:1.12rem;max-width:640px;margin:0 auto 40px;color:#F3F0F8}
 .foot-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-top:1px solid rgba(185,167,217,.25);padding-top:16px;font-size:.78rem;color:var(--lavender)}
 .credits p{margin:0}.credits b{color:#fff;font-weight:600}
