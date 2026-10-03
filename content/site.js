@@ -23,8 +23,8 @@ window.SITE_DATA = {
     "siteTitle": "Mahata Lab — Bacteria and Phage Genetics, NISER Bhubaneswar",
     "description": "The Mahata Lab at NISER Bhubaneswar studies the molecular arms race between bacteria and bacteriophages: bacterial immune systems, phage counter-defense and phage-encoded antimicrobials.",
     "logo": "assets/img/mahata-lab-logo.jpg",
-    "institutionLogo": "assets/img/niser-logo.png",
-    "favicon": "assets/img/mahata-lab-logo.jpg",
+    "institutionLogo": "assets/img/niser-logo wo bg.png",
+    "favicon": "assets/img/mahata-lab-logo wo bg.jpg",
     "footerQuote": "In the fields of observation, chance favors only the prepared mind.-Louis Pasteur ",
     "developedBy": "Samchita Sarangi",
     "maintainedBy": "Dr. Tridib Mahata"
