@@ -4,7 +4,9 @@
    quotes, commas or brackets. Paragraphs use <p>…</p>, bold uses
    <b>…</b>, lists use <ul><li>…</li></ul>.
    Find a section by searching for its name:
-     "settings"     lab name, header subtitle, logo paths, footer quote, developed/maintained by
+     "settings"     lab name, header subtitle, logos, FOOTER text/quote/author,
+                    developed-by / maintained-by credits, which pages show
+                    the footer ("footerHiddenOn") and credits ("creditsOn")
      "home"         hero heading, sub-heading, About the lab text
      "news"         "items": copy one { … } block to add news (top = newest)
      "research"     "themes": the 3 research sections + their pictures
@@ -27,7 +29,15 @@ window.SITE_DATA = {
     "favicon": "assets/img/mahata-lab-logo wo bg.png",
     "footerQuote": "In the fields of observation, chance favors only the prepared mind.",
     "developedBy": "Samchita Sarangi",
-    "maintainedBy": "Dr. Tridib Mahata"
+    "maintainedBy": "Dr. Tridib Mahata",
+    "footerQuoteAuthor": "Louis Pasteur",
+    "footerLab": "Phage Bacteria Interaction Lab | NISER Bhubaneswar",
+    "footerHiddenOn": [
+      "news"
+    ],
+    "creditsOn": [
+      "home"
+    ]
   },
   "nav": [
     {
@@ -66,7 +76,7 @@ window.SITE_DATA = {
     "buttonText": "Explore our research",
     "buttonRoute": "research",
     "aboutTitle": "About the lab",
-    "about": "<p>Our lab explores the fascinating molecular conflict between bacteria and bacteriophages - a never-ending evolutionary arms race that has been ongoing for billions of years, generating an extraordinary arsenal of molecular weapons and defenses. Our aim is to uncover the fundamental mechanisms of this microbial warfare: how phages take over their bacterial hosts, and how bacteria defend themselves against phage attack. In the last couple of years, more than hundered anti-phage defense systems (bacterial immune systems) have been discovered. These systems work either as innate defenses (restriction enzymes, CBASS, GAPS1, GAPS4, GAPS6, etc.) or as memory-based defenses like CRISPR-Cas systems. Using a combination of microbial genetics, molecular biology, genomics, and biochemistry, we investigate this arms race not just to understand it, but to harness it for biotechnology applications. Investigating these molecular battles will help us develop novel antimicrobials, improve phage therapy, design antivirals (thanks to the conservation of immune mechanisms across life), and develop new tools to manipulate bacteria and phages for research and biotechnology.</p>"
+    "about": "<p>Our lab explores the fascinating molecular conflict between bacteria and bacteriophages - a never-ending evolutionary arms race that has been ongoing for billions of years, generating an extraordinary arsenal of molecular weapons and defenses. Our aim is to uncover the fundamental mechanisms of this microbial warfare: how phages take over their bacterial hosts, and how bacteria defend themselves against phage attack. In the last couple of years, hundreds of anti-phage defense systems (bacterial immune systems) have been discovered. These systems work either as innate defenses (restriction enzymes, CBASS, GAPS1, GAPS4, GAPS6, etc.) or as memory-based defenses like CRISPR-Cas systems. Using a combination of microbial genetics, molecular biology, genomics, and biochemistry, we investigate this arms race not just to understand it, but to harness it for biotechnology applications. Investigating these molecular battles will help us develop novel antimicrobials, improve phage therapy, design antivirals (thanks to the conservation of immune mechanisms across life), and develop new tools to manipulate bacteria and phages for research and biotechnology.</p>"
   },
   "news": {
     "title": "News",
@@ -114,12 +124,12 @@ window.SITE_DATA = {
   },
   "publications": {
     "title": "Publications",
-    "subtitle": "2015–2025",
+    "subtitle": "2015–2026",
     "items": [
       {
         "year": "2026",
         "title": "The anti-phage defense system GAPS4 is a double-edged sword that sensitizes bacteria to DNA-damaging agents.",
-        "authors": "Mahata T, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D",
+        "authors": "Mahata T, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D.",
         "venue": "Nucleic Acids Research",
         "tag": "in press",
         "note": "",
