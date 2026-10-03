@@ -25,7 +25,7 @@ window.SITE_DATA = {
     "logo": "assets/img/mahata-lab-logo wo bg.png",
     "institutionLogo": "assets/img/niser-logo wo bg.png",
     "favicon": "assets/img/mahata-lab-logo wo bg.png",
-    "footerQuote": "In the fields of observation, chance favors only the prepared mind." -Louis Pasteur,
+    "footerQuote": "In the fields of observation, chance favors only the prepared mind.",
     "developedBy": "Samchita Sarangi",
     "maintainedBy": "Dr. Tridib Mahata"
   },
