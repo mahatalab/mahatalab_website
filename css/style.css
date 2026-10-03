@@ -65,7 +65,7 @@ section.block{padding:72px 0}main{min-height:60vh}
 
 /* Research */
 .theme{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:48px 0;border-bottom:1px solid var(--pale)}
-.theme:nth-child(even) .theme-img{order:2}
+.theme-img{order:2}
 .theme-img img{border:1px solid var(--lavender);border-radius:6px;background:#fff;width:100%}
 .num{font-size:.85rem;letter-spacing:.2em;color:var(--violet);font-weight:600}
 .theme h2{font-size:1.5rem;margin:.2em 0 .7em}
