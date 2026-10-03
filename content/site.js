@@ -25,7 +25,7 @@ window.SITE_DATA = {
     "logo": "assets/img/mahata-lab-logo.jpg",
     "institutionLogo": "assets/img/niser-logo.png",
     "favicon": "assets/img/mahata-lab-logo.jpg",
-    "footerQuote": "In the fields of observation, chance favors only the prepared mind.",
+    "footerQuote": "In the fields of observation, chance favors only the prepared mind.-Louis Pasteur ",
     "developedBy": "Samchita Sarangi",
     "maintainedBy": "Dr. Tridib Mahata"
   },
@@ -120,7 +120,7 @@ window.SITE_DATA = {
         "year": "2026",
         "title": "The anti-phage defense system GAPS4 is a double-edged sword that sensitizes bacteria to DNA-damaging agents.",
         "authors": "Mahata T, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D",
-        "venue": "Nucleic Acids Research,",
+        "venue": "Nucleic Acids Research",
         "tag": "in press",
         "note": "",
         "link": ""
