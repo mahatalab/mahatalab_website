@@ -18,7 +18,7 @@
 window.SITE_DATA = {
   "settings": {
     "labName": "Mahata Lab",
-    "headerSubtitle": "Phage Bacteria Interaction Lab",
+    "headerSubtitle": "Bacteria and Phage Genetics Lab",
     "tagline": "Bacteria and Phage Genetics Lab | NISER Bhubaneswar",
     "siteTitle": "Mahata Lab — Bacteria and Phage Genetics, NISER Bhubaneswar",
     "description": "The Mahata Lab at NISER Bhubaneswar studies the molecular arms race between bacteria and bacteriophages: bacterial immune systems, phage counter-defense and phage-encoded antimicrobials.",
