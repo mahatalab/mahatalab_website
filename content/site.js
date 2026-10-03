@@ -117,9 +117,9 @@ window.SITE_DATA = {
     "subtitle": "2015–2025",
     "items": [
       {
-        "year": "2025",
-        "title": "Phage-encoded homing endonucleases attenuate bacterial immunity",
-        "authors": "Mahata T, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D.",
+        "year": "2026",
+        "title": "The anti-phage defense system GAPS4 is a double-edged sword that sensitizes bacteria to DNA-damaging agents.",
+        "authors": "Mahata T, Kanarek K, Goren MG, Ragavan RM, Haldar A, Shur G, Yehia R, Burstein D, Haitin Y, Qimron U, Salomon D",
         "venue": "BioRxiv, 2025",
         "tag": "Preprint",
         "note": "",
