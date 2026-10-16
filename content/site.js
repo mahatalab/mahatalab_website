@@ -135,6 +135,15 @@ window.SITE_DATA = {
         "note": "",
         "link": ""
       },
+       {
+        "year": "2026",
+        "title": "Adaptation-coupled CRISPRi identifies antibiotic-sensitizing genes leading to a novel plasmid selection marker",
+        "authors": "Anushree Haldar, Ido Yosef, Moran G Goren, Rea Globus, Maria Yakunina, Tridib Mahata, Udi Qimron",
+        "venue": "Nucleic Acids Research 2026, 54(18), gkag935",
+        "tag": "",
+        "note": "",
+        "link": ""
+      },
       {
         "year": "2024",
         "title": "Gamma-Mobile-Trio systems are mobile elements rich in bacterial defensive and offensive tools",
